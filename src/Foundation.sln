@@ -1,0 +1,133 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{ED426FE4-BF71-4B4D-9BD2-E9B1B8ECE062}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MiddleTier", "MiddleTier", "{5DD41613-BD2B-4912-968E-6C3E68E99A5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationTier", "PresentationTier", "{4121C2AA-ACD7-4403-90F3-4ECED0F284CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genesys.Foundation.Models", "PresentationTier\Foundation.Models\Genesys.Foundation.Models.csproj", "{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1728590D-71DC-447F-B35E-339BFFA8DD33} = {1728590D-71DC-447F-B35E-339BFFA8DD33}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genesys.Foundation.Entity", "MiddleTier\Foundation.Entity\Genesys.Foundation.Entity.csproj", "{18775C40-E495-40F4-8E1A-BD8DF03032A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3BD9F409-C1AA-4548-8210-E79D610C0977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genesys.Foundation.Test", "Test\Foundation.Test\Genesys.Foundation.Test.csproj", "{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genesys.Foundation.Interfaces", "Interfaces\Foundation.Interfaces\Genesys.Foundation.Interfaces.csproj", "{1728590D-71DC-447F-B35E-339BFFA8DD33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|x64.Build.0 = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Debug|x86.Build.0 = Debug|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|ARM.Build.0 = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|x64.ActiveCfg = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|x64.Build.0 = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2}.Release|x86.Build.0 = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|x64.Build.0 = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|ARM.Build.0 = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|x64.ActiveCfg = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|x64.Build.0 = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7}.Release|x86.Build.0 = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|x64.Build.0 = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Debug|x86.Build.0 = Debug|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|ARM.Build.0 = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|x64.ActiveCfg = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|x64.Build.0 = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}.Release|x86.Build.0 = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|ARM.Build.0 = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|x64.Build.0 = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Debug|x86.Build.0 = Debug|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|ARM.Build.0 = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|x64.ActiveCfg = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|x64.Build.0 = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|x86.ActiveCfg = Release|Any CPU
+		{1728590D-71DC-447F-B35E-339BFFA8DD33}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCE0CFD0-2617-4061-A2EA-2BF12DD1C4A2} = {4121C2AA-ACD7-4403-90F3-4ECED0F284CC}
+		{18775C40-E495-40F4-8E1A-BD8DF03032A7} = {5DD41613-BD2B-4912-968E-6C3E68E99A5D}
+		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5} = {3BD9F409-C1AA-4548-8210-E79D610C0977}
+		{1728590D-71DC-447F-B35E-339BFFA8DD33} = {ED426FE4-BF71-4B4D-9BD2-E9B1B8ECE062}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://vgo-tfs-02:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MiddleTier\\Foundation.Entity\\Genesys.Foundation.Entity.csproj
+		SccProjectTopLevelParentUniqueName1 = Foundation.sln
+		SccProjectName1 = MiddleTier/Foundation.Entity
+		SccLocalPath1 = MiddleTier\\Foundation.Entity
+		SccProjectUniqueName2 = PresentationTier\\Foundation.Models\\Genesys.Foundation.Models.csproj
+		SccProjectTopLevelParentUniqueName2 = Foundation.sln
+		SccProjectName2 = PresentationTier/Foundation.Models
+		SccLocalPath2 = PresentationTier\\Foundation.Models
+		SccProjectUniqueName3 = Test\\Foundation.Test\\Genesys.Foundation.Test.csproj
+		SccProjectTopLevelParentUniqueName3 = Foundation.sln
+		SccProjectName3 = Test/Foundation.Test
+		SccLocalPath3 = Test\\Foundation.Test
+		SccProjectUniqueName4 = Interfaces\\Foundation.Interfaces\\Genesys.Foundation.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName4 = Foundation.sln
+		SccProjectName4 = Interfaces/Foundation.Interfaces
+		SccLocalPath4 = Interfaces\\Foundation.Interfaces
+	EndGlobalSection
+EndGlobal
