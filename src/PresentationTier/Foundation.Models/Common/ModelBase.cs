@@ -31,7 +31,7 @@ namespace Genesys.Foundation.Entity
 	/// </summary>
 	/// <remarks>ModelBase</remarks>
 	[CLSCompliant(true)]
-	public abstract class ModelBase<TModel> : IID, IKey, INotifyPropertyChanged where TModel : ModelBase<TModel>, new()
+	public abstract class ModelEntity<TModel> : IID, IKey, INotifyPropertyChanged where TModel : ModelEntity<TModel>, new()
 	{
         /// <summary>
         /// Primary key of this record. Internal use only, use Key when exposing data externally.
@@ -46,7 +46,7 @@ namespace Genesys.Foundation.Entity
         /// <summary>
         /// Constructor
         /// </summary>
-        public ModelBase() : base() { this.Initialize<ModelBase<TModel>>(); }
+        public ModelEntity() : base() { this.Initialize<ModelEntity<TModel>>(); }
 		
         /// <summary>
         /// Fired when property is changed

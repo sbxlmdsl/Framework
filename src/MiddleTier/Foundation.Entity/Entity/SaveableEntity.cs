@@ -26,7 +26,6 @@ using System.Reflection;
 using Genesys.Extensions;
 using Genesys.Extras.Exceptions;
 using Genesys.Extras.Serialization;
-using Genesys.Foundation.Entity;
 using Genesys.Foundation.Validation;
 using Genesys.Foundation.Activity;
 using Genesys.Extras.Configuration;
@@ -80,13 +79,13 @@ namespace Genesys.Foundation.Entity
         public bool ThrowException { get; set; } = TypeExtension.DefaultBoolean;
 
         /// <summary>
-        /// Is a new object, and most likely not yet committed to the database
+        /// Is this a new object not yet committed to the database
         /// </summary>
         public virtual bool IsNew
         {
             get
             {
-                return (this.ID == TypeExtension.DefaultInteger ? true : false) && (this.Key == TypeExtension.DefaultGuid ? true : false);
+                return (this.ID == TypeExtension.DefaultInteger ? true : false);
             }
         }
 
@@ -253,6 +252,9 @@ namespace Genesys.Foundation.Entity
                         {
                             if (this.ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Updates not allowed."));
                         }
+                        // Overlay new data onto existing DB record.
+                        newItem = dbContext.EntityData.Find(this.ID);
+                        newItem?.FillByInterface((TEntity)this);
                     }
                     this.ValidateAll(this);
                     if (this.CanSave(this) == true)

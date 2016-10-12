@@ -28,7 +28,7 @@ namespace Genesys.Foundation.Name
 	/// </summary>
 	/// <remarks></remarks>
 	[CLSCompliant(true)]
-	public class NameDescriptionModel : ModelBase<NameDescriptionModel>, INameDescription
+	public class NameDescriptionModel : ModelEntity<NameDescriptionModel>, INameDescription
 	{
         /// <summary>
         /// Name

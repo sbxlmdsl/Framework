@@ -27,7 +27,7 @@ namespace Genesys.Foundation.Entity
 	/// </summary>
 	/// <remarks></remarks>
 	[CLSCompliant(true)]
-	public class BytesKeyModel : ModelBase<BytesKeyModel>, IBytesKey
+	public class BytesKeyModel : ModelEntity<BytesKeyModel>, IBytesKey
 	{
         /// <summary>
         /// Bytes of BLOB

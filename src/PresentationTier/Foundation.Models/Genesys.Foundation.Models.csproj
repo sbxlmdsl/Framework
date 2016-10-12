@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="packages.config" />
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
@@ -55,14 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Genesys.Extensions.Universal">
-      <HintPath>..\..\..\lib\GenesysExtensions\Genesys.Extensions.Universal.dll</HintPath>
-    </Reference>
-    <Reference Include="Genesys.Extras.Universal">
-      <HintPath>..\..\..\lib\GenesysExtensions\Genesys.Extras.Universal.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Activity\" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +63,16 @@
       <Project>{1728590d-71dc-447f-b35e-339bffa8dd33}</Project>
       <Name>Genesys.Foundation.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Genesys.Extensions.Universal">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.9\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Genesys.Extras.Universal">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.9\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>

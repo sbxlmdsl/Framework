@@ -18,6 +18,8 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
+using Genesys.Foundation.Process;
+using Genesys.Foundation.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Genesys.Foundation.Test
@@ -28,13 +30,17 @@ namespace Genesys.Foundation.Test
         [TestMethod()]
         public void Validation_ValidationRule()
         {
-            //Assert.Fail();
+            ProcessResult result = new ProcessResult() { ReturnID = 123 };            
+            ValidationRule<ProcessResult> rule = new ValidationRule<ProcessResult>("ReturnID", x => x.ReturnID > 0);
+            Assert.IsTrue(rule.Validate(result) == true, "Did not work");
         }
 
         [TestMethod()]
         public void Validation_Validate()
         {
-            //Assert.Fail();
+            ProcessResult result = new ProcessResult() { ReturnID = 123 };
+            ValidationRule<ProcessResult> rule = new ValidationRule<ProcessResult>("ReturnID", x => x.ReturnID > 0);
+            Assert.IsTrue(rule.Validate(result) == true, "Did not work");
         }
     }
 }

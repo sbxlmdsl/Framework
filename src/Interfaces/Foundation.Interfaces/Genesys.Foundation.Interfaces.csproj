@@ -86,14 +86,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Genesys.Extensions.Universal">
-      <HintPath>..\..\..\lib\GenesysExtensions\Genesys.Extensions.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extensions.Universal, Version=3.0.6096.14255, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.9\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extras.Universal">
-      <HintPath>..\..\..\lib\GenesysExtensions\Genesys.Extras.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extras.Universal, Version=3.0.6096.14257, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.9\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

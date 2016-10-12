@@ -28,7 +28,7 @@ namespace Genesys.Foundation.Name
 	/// </summary>
 	/// <remarks></remarks>
 	[CLSCompliant(true)]
-	public class NameIDModel : ModelBase<NameIDModel>, INameID
+	public class NameIDModel : ModelEntity<NameIDModel>, INameID
 	{
         /// <summary>
         /// Name
