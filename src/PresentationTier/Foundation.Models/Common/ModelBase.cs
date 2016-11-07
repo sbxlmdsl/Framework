@@ -103,20 +103,7 @@ namespace Genesys.Foundation.Entity
 		{
 			return this.ID.ToString();
 		}
-
-        /// <summary>
-        /// Static ability to fill this class with a class that implements the same Property(s)
-        /// This method fully constructs TEntity before filling.
-        /// </summary>
-        /// <param name="sourceItem">Item to fill TEntity object, must implement at least one common Property.</param>
-        /// <returns>Fully-constructed, fully-hydrated TEntity class</returns>
-        public static TModel Fill(object sourceItem)
-        {
-            TModel returnValue = new TModel();
-            returnValue.FillByProperty<TModel>(sourceItem);
-            return returnValue;
-        }
-
+        
         /// <summary>
         /// Serializes this object into a Json string
         /// </summary>

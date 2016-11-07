@@ -15,3 +15,7 @@ Echo Input:  %1%2.* to %LibFolder%
 MD %LibFolder%
 %WINDIR%\system32\attrib.exe %LibFolder%\*.* -r /s
 %WINDIR%\system32\xcopy.exe %1%2.* %LibFolder%\*.* /f/s/e/r/c/y
+
+REM Copy all other Genesys dependencies for documentation/dependency-syncing purposes
+REM Do this on projects that have dependencies to specific versions
+%WINDIR%\system32\xcopy.exe %1Genesys.* %LibFolder%\*.* /f/s/e/r/c/y

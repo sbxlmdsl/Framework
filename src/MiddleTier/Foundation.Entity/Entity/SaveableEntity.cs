@@ -161,7 +161,8 @@ namespace Genesys.Foundation.Entity
         }
 
         /// <summary>
-        /// Gets all from database. Use .ToList() to convert to Generic.List(Of EntityDataType)
+        /// Gets all from database
+        /// Can add clauses, such as GetAll().Take(1), GetAll().Where(), etc.
         /// </summary>
         public static IQueryable<TEntity> GetAll()
         {
@@ -254,7 +255,7 @@ namespace Genesys.Foundation.Entity
                         }
                         // Overlay new data onto existing DB record.
                         newItem = dbContext.EntityData.Find(this.ID);
-                        newItem?.FillByInterface((TEntity)this);
+                        newItem?.Fill((TEntity)this);
                     }
                     this.ValidateAll(this);
                     if (this.CanSave(this) == true)
@@ -264,7 +265,7 @@ namespace Genesys.Foundation.Entity
                     if(dbContext.DataConcurrency() == DataConcurrencyValues.Pessimistic)
                     {
                         newItem = SaveableEntity<TEntity>.GetByID(this.ID); // Re-pull to load any data changed by the database (i.e. re-linking IDs, default values.)
-                        this.FillByInterface(newItem); // Fill current object from database item to absorb all current values
+                        this.Fill(newItem); // Fill current object from database item to absorb all current values
                     }
                 }
             }
@@ -319,7 +320,7 @@ namespace Genesys.Foundation.Entity
                     dbContext.SaveChanges();
                 } else
                 {
-                    this.FillByInterface(new TEntity());
+                    this.Fill(new TEntity());
                 }
             }
             catch (Exception ex)
@@ -336,19 +337,6 @@ namespace Genesys.Foundation.Entity
             }
         }
         
-        /// <summary>
-        /// Static ability to fill this class with a class that implements the same Property(s)
-        /// This method fully constructs TEntity before filling.
-        /// </summary>
-        /// <param name="sourceItem">Item to fill TEntity object, must implement at least one common Property.</param>
-        /// <returns>Fully-constructed, fully-hydrated TEntity class</returns>
-        public static TEntity Fill(object sourceItem)
-        {
-            TEntity returnValue = new TEntity();
-            returnValue.FillByProperty<TEntity>(sourceItem);
-            return returnValue;
-        }
-
         /// <summary>
         /// Compares two objects
         /// </summary>

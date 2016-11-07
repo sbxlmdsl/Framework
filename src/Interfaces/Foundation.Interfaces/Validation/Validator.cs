@@ -66,9 +66,8 @@ namespace Genesys.Foundation.Validation
         }
         
         /// <summary>
-        /// Determines if all items are valid. Will run Validate() if has not been validated yet.
-        /// </summary>
-        
+        /// Determines if all items are valid
+        /// </summary>        
         public bool IsValid(TEntity entity)
         {
             bool returnValue = TypeExtension.DefaultBoolean;

@@ -66,7 +66,7 @@ namespace Genesys.Foundation.Process
         /// </summary>
         public ProcessParameter(UserPrincipal principalIdentity, TDataIn inputData) : this(inputData)
         {
-            this.Context.FillByInterface(principalIdentity);
+            this.Context.Fill(principalIdentity);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Genesys.Foundation.Process
         /// <param name="data">Data to send</param>
         public ProcessParameter(ISessionContext context, TDataIn data) : this(data)
         {
-            this.Context.FillByInterface(context);
+            this.Context.Fill(context);
         }       
     }
 }

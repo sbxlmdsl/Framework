@@ -75,7 +75,7 @@ namespace Genesys.Foundation.Test
             // Test Item1 Serialization            
             dataToSendSerialized = serializer.Serialize(item1);
             Assert.IsTrue(dataToSendSerialized != TypeExtension.DefaultString, "Did not fail. It should have failed.");
-            item1.FillByInterface(serializer.Deserialize(dataToSendSerialized));
+            item1.Fill(serializer.Deserialize(dataToSendSerialized));
             Assert.IsTrue(item1 != null, "Did not work.");
 
             // Test Item2 Serialization

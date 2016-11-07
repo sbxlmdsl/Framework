@@ -131,7 +131,8 @@ namespace Genesys.Foundation.Entity
         }
 
         /// <summary>
-        /// Gets all from database. Use .ToList() to convert to Generic.List(Of ReadOnlyEntityType)
+        /// Gets all from database
+        /// Can add clauses, such as GetAll().Take(1), GetAll().Where(), etc.
         /// </summary>
         public static IQueryable<TEntity> GetAll()
         {
