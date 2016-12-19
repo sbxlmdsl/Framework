@@ -92,7 +92,7 @@ namespace Genesys.Extras.Exceptions
         public ExceptionLog()
             : base()
         {
-            this.CreatedDate = DateTime.UtcNow;
+            CreatedDate = DateTime.UtcNow;
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace Genesys.Extras.Exceptions
         public ExceptionLog(System.Exception exception, Type concreteType, string customMessage)
             : this()
         {            
-            this.CurrentException = exception;
-            this.CustomMessage = String.Format("Error in type: {0}. Message: {1}", concreteType.ToString(), customMessage);
+            CurrentException = exception;
+            CustomMessage = String.Format("Error in type: {0}. Message: {1}", concreteType.ToString(), customMessage);
         }
         
         /// <summary>
@@ -113,7 +113,7 @@ namespace Genesys.Extras.Exceptions
         /// </summary>
         public override string ToString()
         {
-            return this.ExceptionLogID.ToString();
+            return ExceptionLogID.ToString();
         }
     }
 }

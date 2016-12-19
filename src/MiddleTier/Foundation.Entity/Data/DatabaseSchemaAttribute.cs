@@ -41,7 +41,7 @@ namespace Genesys.Foundation.Data
         /// <param name="databaseSchemaValue">Database schema name</param>
         public DatabaseSchemaAttribute(string databaseSchemaValue)
         {
-            this.Value = databaseSchemaValue;
+            Value = databaseSchemaValue;
         }
     }
 }

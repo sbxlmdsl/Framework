@@ -54,8 +54,8 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         protected ActivityLogger() : base()
         {
-            this.ExecutingContext = ExecutingContextInfo();
-            this.StackTrace = Environment.StackTrace;
+            ExecutingContext = ExecutingContextInfo();
+            StackTrace = Environment.StackTrace;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Genesys.Foundation.Activity
         /// <remarks></remarks>
         public ActivityLogger(string connectStringName) : this()
         {
-            this.ConnectionStringName = connectStringName;
+            ConnectionStringName = connectStringName;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Genesys.Foundation.Activity
         /// <remarks></remarks>
         public ActivityLogger(string connectStringName, string databaseSchemaName) : this(connectStringName)
         {
-            this.DatabaseSchemaName = databaseSchemaName;
+            DatabaseSchemaName = databaseSchemaName;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Genesys.Foundation.Activity
         public static Activity GetByID(int id, string connectStringName, string databaseSchema)
         {
             Activity returnValue = new Activity();
-            DatabaseContext dbContext = new DatabaseContext(connectStringName, databaseSchema);
+            var dbContext = new DatabaseContext(connectStringName, databaseSchema);
 
             try
             {
@@ -121,13 +121,13 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         public virtual int Save()
         {
-            DatabaseContext dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName);
+            var dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName);
 
             try
             {
-                if (this.ActivityID == TypeExtension.DefaultInteger)
+                if (ActivityID == TypeExtension.DefaultInteger)
                 {
-                    this.ExecutingContext = ExecutingContextInfo();
+                    ExecutingContext = ExecutingContextInfo();
                     dbContext.EntityData.Add(this);
                     dbContext.SaveChanges();
                 }
@@ -141,7 +141,7 @@ namespace Genesys.Foundation.Activity
                 dbContext.Dispose();
             }
 
-            return this.ActivityID;
+            return ActivityID;
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Genesys.Foundation.Activity
         /// <returns></returns>
         private string ExecutingContextInfo()
         {
-            string returnValue = TypeExtension.DefaultString;
+            var returnValue = TypeExtension.DefaultString;
 
             try
             {
@@ -186,7 +186,7 @@ namespace Genesys.Foundation.Activity
             public DatabaseContext(string connectStringName, string databaseSchema)
                 : base(ConfigurationManagerFull.ConnectionStrings.GetValue(connectStringName))
             {
-                this.databaseSchemaField = databaseSchema;
+                databaseSchemaField = databaseSchema;
             }
 
             /// <summary>

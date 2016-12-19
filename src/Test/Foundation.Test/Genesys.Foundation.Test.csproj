@@ -49,19 +49,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extensions.Full, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rc4\lib\net46\Genesys.Extensions.Full.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rp1\lib\net46\Genesys.Extensions.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extensions.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rc4\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rp1\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Full, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rc4\lib\net46\Genesys.Extras.Full.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rp1\lib\net46\Genesys.Extras.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rc4\lib\net46\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.0.11-rp1\lib\net46\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="Activity\ActivityLoggerTests.cs" />
     <Compile Include="Common\MyApplication.cs" />
+    <Compile Include="Device\DeviceStorageTests.cs" />
+    <Compile Include="Device\DeviceInfoTests.cs" />
     <Compile Include="Exceptions\ExceptionLoggerTests.cs" />
     <Compile Include="Process\ProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,13 +101,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Interfaces\Foundation.Interfaces\Genesys.Foundation.Interfaces.csproj">
-      <Project>{1728590d-71dc-447f-b35e-339bffa8dd33}</Project>
-      <Name>Genesys.Foundation.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MiddleTier\Foundation.Entity\Genesys.Foundation.Entity.csproj">
       <Project>{18775c40-e495-40f4-8e1a-bd8df03032a7}</Project>
       <Name>Genesys.Foundation.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MiddleTier\Foundation.Interfaces\Genesys.Foundation.Interfaces.csproj">
+      <Project>{1728590d-71dc-447f-b35e-339bffa8dd33}</Project>
+      <Name>Genesys.Foundation.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PresentationTier\Foundation.Models\Genesys.Foundation.Models.csproj">
       <Project>{dce0cfd0-2617-4061-a2ea-2bf12dd1c4a2}</Project>

@@ -60,7 +60,7 @@ namespace Genesys.Foundation.Data
         /// <param name="value">Value to hydrate</param>
         public DataConcurrency(DataConcurrencyValues value)
         {
-            this.Value = value;
+            Value = value;
         }
     }
 }

@@ -96,7 +96,7 @@ namespace Genesys.Foundation.Entity
         {
             this.Initialize<SaveableEntity<TEntity>>();
 #if (DEBUG)
-            this.ThrowException = true;
+            ThrowException = true;
 #endif
         }
 
@@ -106,7 +106,7 @@ namespace Genesys.Foundation.Entity
         protected SaveableEntity(int newID)
             : this()
         {
-            this.ID = newID;
+            ID = newID;
         }
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="id">The unique ID of the object</param>
         public static TEntity GetByID(int id)
         {
-            DatabaseContext dbContext = new DatabaseContext();
-            TEntity returnValue = new TEntity();
+            var dbContext = new DatabaseContext();
+            var returnValue = new TEntity();
 
             try
             {
@@ -142,8 +142,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="Key">The unique ID of the object</param>
         public static TEntity GetByKey(Guid Key)
         {
-            DatabaseContext dbContext = new DatabaseContext();
-            TEntity returnValue = new TEntity();
+            var dbContext = new DatabaseContext();
+            var returnValue = new TEntity();
 
             try
             {
@@ -166,7 +166,7 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public static IQueryable<TEntity> GetAll()
         {
-            DatabaseContext dbContext = new DatabaseContext();
+            var dbContext = new DatabaseContext();
             IQueryable<TEntity> returnValue = default(IQueryable<TEntity>);
 
             try
@@ -195,7 +195,7 @@ namespace Genesys.Foundation.Entity
         public IQueryable<TEntity> GetWithPaging(Expression<Func<TEntity, Boolean>> whereClause,
             Expression<Func<TEntity, Boolean>> orderByClause, int pageSize, int pageNumber)
         {
-            DatabaseContext dbContext = new DatabaseContext();
+            var dbContext = new DatabaseContext();
             IQueryable<TEntity> result = null;
             result = (dbContext.EntityData.Select(x => x)).AsQueryable();
             if (whereClause != null) { result = result.Where<TEntity>(whereClause).AsQueryable(); }
@@ -211,7 +211,7 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public virtual int Save()
         {
-            return this.Save(false);
+            return Save(false);
         }
 
         /// <summary>
@@ -221,8 +221,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="activity">Activity record owning this process.</param>        
         public virtual int Save(IActivity activity)
         {
-            this.ActivityID = activity.ActivityID;
-            return this.Save(false);
+            ActivityID = activity.ActivityID;
+            return Save(false);
         }
 
         /// <summary>
@@ -231,34 +231,34 @@ namespace Genesys.Foundation.Entity
         /// <param name="forceInsert">Ability to override insert vs. update and force insert</param>
         protected virtual int Save(bool forceInsert)
         {
-            DatabaseContext dbContext = new DatabaseContext();
-            TEntity newItem = new TEntity();
+            var dbContext = new DatabaseContext();
+            var newItem = new TEntity();
 
             try
             {
-                if (this.Equals(new TEntity()) == false)
+                if (Equals(new TEntity()) == false)
                 {
                     if (ActivityLogger.GetByID(this.ActivityID, "MyDataConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
-                        { this.ActivityID = ActivityLogger.Create("MyDataConnection", "Activity"); } // All database commits require activity of some sort
-                    if (this.IsNew == true || forceInsert == true || dbContext.DataAccessBehavior() == DataAccessBehaviorValues.InsertOnly)
+                        { ActivityID = ActivityLogger.Create("MyDataConnection", "Activity"); } // All database commits require activity of some sort
+                    if (IsNew == true || forceInsert == true || dbContext.DataAccessBehavior() == DataAccessBehaviorValues.InsertOnly)
                     {
                         if (dbContext.DataAccessBehavior() == DataAccessBehaviorValues.SelectOnly)
                         {
-                            if (this.ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Inserts not allowed."));
+                            if (ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Inserts not allowed."));
                         }
                         dbContext.EntityData.Add((TEntity)this);
                     } else
                     {
                         if ((dbContext.DataAccessBehavior() != DataAccessBehaviorValues.AllAccess) | (dbContext.DataAccessBehavior() == DataAccessBehaviorValues.NoUpdate))
                         {
-                            if (this.ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Updates not allowed."));
+                            if (ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Updates not allowed."));
                         }
                         // Overlay new data onto existing DB record.
                         newItem = dbContext.EntityData.Find(this.ID);
                         newItem?.Fill((TEntity)this);
                     }
-                    this.ValidateAll(this);
-                    if (this.CanSave(this) == true)
+                    ValidateAll(this);
+                    if (CanSave(this) == true)
                     {
                         dbContext.SaveChanges();
                     }
@@ -275,14 +275,14 @@ namespace Genesys.Foundation.Entity
                 System.Diagnostics.Debugger.Break();
 #endif
                 ExceptionLogger.Create(ex, typeof(TEntity), String.Format("{0}.Save() in SaveableEntity", this.GetType().ToStringSafe()), "MyLogConnection", "MiddleTier");
-                if (this.ThrowException) throw;
+                if (ThrowException) throw;
             }
             finally
             {
                 dbContext.Dispose();
             }
 
-            return this.ID;
+            return ID;
         }
 
         /// <summary>
@@ -292,8 +292,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="activity">Activity record owning this process.</param>        
         public virtual void Delete(IActivity activity)
         {
-            this.ActivityID = activity.ActivityID;
-            this.Delete();
+            ActivityID = activity.ActivityID;
+            Delete();
         }
 
         /// <summary>
@@ -302,19 +302,19 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public virtual void Delete()
         {
-            DatabaseContext dbContext = new DatabaseContext();
+            var dbContext = new DatabaseContext();
 
             try
             {
-                if (this.ID != TypeExtension.DefaultInteger)
+                if (ID != TypeExtension.DefaultInteger)
                 {
                     if (ActivityLogger.GetByID(this.ActivityID, "MyDataConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
                     {
-                        this.ActivityID = ActivityLogger.Create("MyDataConnection", new TEntity().GetAttributeValue<DatabaseSchemaAttribute>("Activity"));
+                        ActivityID = ActivityLogger.Create("MyDataConnection", new TEntity().GetAttributeValue<DatabaseSchemaAttribute>("Activity"));
                     } // All database commits require activity of some sort
                     if ((dbContext.DataAccessBehavior() == DataAccessBehaviorValues.InsertOnly) & (dbContext.DataAccessBehavior() == DataAccessBehaviorValues.SelectOnly))
                     {
-                        if (this.ThrowException) throw new System.Exception("Deletes not allowed.");
+                        if (ThrowException) throw new System.Exception("Deletes not allowed.");
                     }
                     dbContext.EntityData.Remove(dbContext.EntityData.Where(x => x.ID == this.ID).FirstOrDefaultSafe());
                     dbContext.SaveChanges();
@@ -329,7 +329,7 @@ namespace Genesys.Foundation.Entity
                 System.Diagnostics.Debugger.Break();
 #endif
                 ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.Delete() on {0}", this.ToString()), "MyLogConnection", "MiddleTier");
-                if (this.ThrowException) throw;
+                if (ThrowException) throw;
             }
             finally
             {
@@ -347,7 +347,7 @@ namespace Genesys.Foundation.Entity
             Type newObjectType = newItem.GetType();
 
             returnValue = true;
-            foreach (PropertyInfo newObjectProperty in newObjectType.GetProperties())
+            foreach (var newObjectProperty in newObjectType.GetProperties())
             {
                 PropertyInfo currentProperty = typeof(TEntity).GetProperty(newObjectProperty.Name);
                 if (currentProperty.CanWrite == true)
@@ -370,7 +370,7 @@ namespace Genesys.Foundation.Entity
         /// <remarks></remarks>
         public override string ToString()
         {
-            return this.ID.ToString();
+            return ID.ToString();
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace Genesys.Foundation.Entity
         /// <returns></returns>
         public static string ConnectionString()
         {
-            string returnValue = TypeExtension.DefaultString;
+            var returnValue = TypeExtension.DefaultString;
             ConnectionStringSafe configConnectString = new ConnectionStringSafe();
             ConfigurationManagerFull configManager = new ConfigurationManagerFull();
 
@@ -401,9 +401,9 @@ namespace Genesys.Foundation.Entity
             internal DataAccessBehaviorValues DataAccessBehavior()
             {
                 DataAccessBehaviorValues returnValue = DataAccessBehaviorValues.AllAccess;
-                TEntity itemType = new TEntity();
+                var itemType = new TEntity();
 
-                foreach (object item in itemType.GetType().GetCustomAttributes(false))
+                foreach (var item in itemType.GetType().GetCustomAttributes(false))
                 {
                     if ((item is DataAccessBehavior) == true)
                     {
@@ -422,9 +422,9 @@ namespace Genesys.Foundation.Entity
             internal DataConcurrencyValues DataConcurrency()
             {
                 DataConcurrencyValues returnValue = DataConcurrencyValues.Pessimistic;
-                TEntity itemType = new TEntity();
+                var itemType = new TEntity();
 
-                foreach (object item in itemType.GetType().GetCustomAttributes(false))
+                foreach (var item in itemType.GetType().GetCustomAttributes(false))
                 {
                     if ((item is DataConcurrency) == true)
                     {
@@ -455,7 +455,7 @@ namespace Genesys.Foundation.Entity
             {
                 // Throw exception always in debug mode
 #if (DEBUG)
-                this.ThrowException = true;
+                ThrowException = true;
 #endif
             }
 
@@ -474,7 +474,7 @@ namespace Genesys.Foundation.Entity
                 catch (Exception ex)
                 {
                     ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.SaveChanges() on {0}", this.ToString()), "MyLogConnection", "MiddleTier");
-                    if (this.ThrowException == true)
+                    if (ThrowException == true)
                     {
                         throw;
                     }

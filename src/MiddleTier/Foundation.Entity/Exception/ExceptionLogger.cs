@@ -89,12 +89,12 @@ namespace Genesys.Extras.Exceptions
         /// <summary>
         /// URL
         /// </summary>
-        public string URL { get { return this.endpointUrl.ToString(); } protected set { } }
+        public string URL { get { return endpointUrl.ToString(); } protected set { } }
 
         /// <summary>
         /// This protected constructor should not be called. Factory methods should be used instead.
         /// </summary>
-        protected ExceptionLogger() : base() { this.CreatedDate = DateTime.UtcNow; }
+        protected ExceptionLogger() : base() { CreatedDate = DateTime.UtcNow; }
 
         /// <summary>
         /// Constructor
@@ -103,7 +103,7 @@ namespace Genesys.Extras.Exceptions
         /// <remarks></remarks>
         public ExceptionLogger(string connectStringName) : this()
         {
-            this.ConnectionStringName = connectStringName;
+            ConnectionStringName = connectStringName;
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Genesys.Extras.Exceptions
         /// </summary>
         /// <param name="connectStringName"></param>
         /// <param name="databaseSchema"></param>
-        public ExceptionLogger(string connectStringName, string databaseSchema) : this(connectStringName) { this.DatabaseSchemaName = databaseSchema; }
+        public ExceptionLogger(string connectStringName, string databaseSchema) : this(connectStringName) { DatabaseSchemaName = databaseSchema; }
 
         /// <summary>
         /// Constructor
@@ -122,7 +122,7 @@ namespace Genesys.Extras.Exceptions
         public ExceptionLogger(Exception exception, Type concreteType, string customMessage) : base(exception, concreteType, customMessage) { }
 
         /// <summary>
-        /// Hydrates object and saves the log record    
+        /// Hydrates object and saves the log record
         /// </summary>
         /// <param name="exception">System.Exception object to log</param>
         /// <param name="concreteType">Type that is logging the exception</param>
@@ -144,7 +144,7 @@ namespace Genesys.Extras.Exceptions
         public static ExceptionLog GetByID(int id, string connectStringName, string databaseSchema)
         {
             ExceptionLog returnValue = new ExceptionLog();
-            DatabaseContext dbContext = new DatabaseContext(connectStringName, databaseSchema);
+            var dbContext = new DatabaseContext(connectStringName, databaseSchema);
 
             try
             {
@@ -170,7 +170,7 @@ namespace Genesys.Extras.Exceptions
             {
                 try
                 {
-                    if (this.ExceptionLogID == TypeExtension.DefaultInteger)
+                    if (ExceptionLogID == TypeExtension.DefaultInteger)
                     {
                         dbContext.EntityData.Add(this);
                         dbContext.SaveChanges();
@@ -178,11 +178,11 @@ namespace Genesys.Extras.Exceptions
                 }
                 catch (Exception ex)
                 {
-                    this.CurrentException = ex; // Never let save errors propagate, else endless loop
+                    CurrentException = ex; // Never let save errors propagate, else endless loop
                 }
             }
                 
-            return this.ExceptionLogID;
+            return ExceptionLogID;
         }
         
         /// <summary>
@@ -204,7 +204,7 @@ namespace Genesys.Extras.Exceptions
             public DatabaseContext(string connectStringName, string databaseSchema)
                 : base(ConfigurationManagerFull.ConnectionStrings.GetValue(connectStringName))
             {
-                this.databaseSchemaField = databaseSchema;
+                databaseSchemaField = databaseSchema;
             }
 
             /// <summary>

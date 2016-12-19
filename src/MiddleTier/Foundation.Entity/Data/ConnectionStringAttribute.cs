@@ -41,7 +41,7 @@ namespace Genesys.Foundation.Data
         /// <param name="connectionStringValue">Connection string name</param>
         public ConnectionStringAttribute(string connectionStringValue)
         {
-            this.Value = connectionStringValue;
+            Value = connectionStringValue;
         }
     }
 }

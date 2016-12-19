@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ReadOnlyEntityBase.cs" company="Genesys Source">
+// <copyright file="ReadOnlyEntity.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -87,8 +87,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="id">The unique ID of the object</param>
         public static TEntity GetByID(int id)
         {
-            DatabaseContext dbContext = new DatabaseContext();
-            TEntity returnValue = new TEntity();
+            var dbContext = new DatabaseContext();
+            var returnValue = new TEntity();
 
             try
             {
@@ -111,8 +111,8 @@ namespace Genesys.Foundation.Entity
         /// <param name="Key">The unique ID of the object</param>
         public static TEntity GetByKey(Guid Key)
         {
-            TEntity returnValue = new TEntity();
-            DatabaseContext dbContext = new DatabaseContext();
+            var returnValue = new TEntity();
+            var dbContext = new DatabaseContext();
 
             try
             {
@@ -136,7 +136,7 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public static IQueryable<TEntity> GetAll()
         {
-            DatabaseContext dbContext = new DatabaseContext();
+            var dbContext = new DatabaseContext();
             IQueryable<TEntity> returnValue = default(IQueryable<TEntity>);
 
             try
@@ -161,7 +161,7 @@ namespace Genesys.Foundation.Entity
         /// <returns></returns>
         public IQueryable<TEntity> GetWithPaging(Expression<Func<TEntity, Boolean>> whereClause, Expression<Func<TEntity, Boolean>> orderByClause, int pageSize, int pageNumber)
         {
-            DatabaseContext dbContext = new DatabaseContext();
+            var dbContext = new DatabaseContext();
             IQueryable<TEntity> result = null;
             result = (dbContext.EntityData.Select(x => x)).AsQueryable();
             if (whereClause != null) { result = result.Where<TEntity>(whereClause).AsQueryable(); }
@@ -181,7 +181,7 @@ namespace Genesys.Foundation.Entity
             Type newObjectType = newItem.GetType();
             returnValue = true;
 
-            foreach (PropertyInfo newObjectProperty in newObjectType.GetProperties())
+            foreach (var newObjectProperty in newObjectType.GetProperties())
             {                
                 PropertyInfo CurrentProperty = typeof(TEntity).GetProperty(newObjectProperty.Name);
                 if (CurrentProperty.CanWrite == true)
@@ -204,7 +204,7 @@ namespace Genesys.Foundation.Entity
         /// <remarks></remarks>
         public override string ToString()
         {
-            return this.Key.ToString();
+            return Key.ToString();
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Genesys.Foundation.Entity
         /// <returns></returns>
         public static string ConnectionString()
         {
-            string returnValue = TypeExtension.DefaultString;
+            var returnValue = TypeExtension.DefaultString;
             ConnectionStringSafe configConnectString = new ConnectionStringSafe();
             ConfigurationManagerFull configManager = new ConfigurationManagerFull();
 
@@ -246,7 +246,7 @@ namespace Genesys.Foundation.Entity
                 : base(ConnectionString())
             {
                 #if (DEBUG)
-                    this.ThrowException = true;
+                    ThrowException = true;
                 #endif
             }
         }

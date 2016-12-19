@@ -53,37 +53,33 @@
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ModelBase.cs" />
-    <Compile Include="Device\DeviceInfo.cs" />
-    <Compile Include="Device\DeviceStorage.cs" />
-    <Compile Include="Device\MyApplication.cs" />
-    <Compile Include="Entity\BytesIDModel.cs" />
+    <Compile Include="Activity\ActivityModel.cs" />
+    <Compile Include="Entity\ImageModel.cs" />
+    <Compile Include="Entity\BytesKeyModel.cs" />
+    <Compile Include="Entity\ModelEntity.cs" />
     <Compile Include="Name\NameDescriptionModel.cs" />
     <Compile Include="Name\NameIDModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Activity\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Interfaces\Foundation.Interfaces\Genesys.Foundation.Interfaces.csproj">
+    <ProjectReference Include="..\..\MiddleTier\Foundation.Interfaces\Genesys.Foundation.Interfaces.csproj">
       <Project>{1728590d-71dc-447f-b35e-339bffa8dd33}</Project>
       <Name>Genesys.Foundation.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Genesys.Extensions.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rc4\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rp1\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rc4\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rp1\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Call $(ProjectDir)PostBuild.Bat $(TargetDir) $(TargetName)</PostBuildEvent>
+    <PostBuildEvent>Call "$(ProjectDir)PostBuild.Bat" "$(TargetDir)" "$(TargetName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

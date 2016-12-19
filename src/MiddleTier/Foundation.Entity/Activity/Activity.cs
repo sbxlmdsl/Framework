@@ -120,7 +120,7 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         public override string ToString()
         {
-            return this.ActivityID.ToString();
+            return ActivityID.ToString();
         }
     }
 }

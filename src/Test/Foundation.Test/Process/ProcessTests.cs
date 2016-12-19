@@ -25,6 +25,9 @@ using Genesys.Extras.Serialization;
 using Genesys.Foundation.Name;
 using Genesys.Foundation.Process;
 using Genesys.Foundation.Session;
+using System.Threading.Tasks;
+using Genesys.Extras.Configuration;
+using Genesys.Extras.Net;
 
 namespace Genesys.Foundation.Test
 {
@@ -62,9 +65,9 @@ namespace Genesys.Foundation.Test
         public void Process_ProcessParameterSerialize()
         {
             // Initialize
-            String dataToSendSerialized = TypeExtension.DefaultString;
-            SessionContext context = new SessionContext(this.ToString(), Guid.NewGuid().ToString(), "MyName");
-            NameIDModel dataIn = new NameIDModel() { Name = "NameField" };
+            var dataToSendSerialized = TypeExtension.DefaultString;
+            var context = new SessionContext(this.ToString(), Guid.NewGuid().ToString(), "MyName");
+            var dataIn = new NameIDModel() { Name = "NameField" };
             IProcessParameter<INameID> item1 = new ProcessParameter<INameID>() { Context = context, DataIn = dataIn };
             ProcessParameter<NameIDModel> item2 = new ProcessParameter<NameIDModel>() { Context = context, DataIn = dataIn };
             ISerializer<ProcessParameter<NameIDModel>> serializer = new JsonSerializer<ProcessParameter<NameIDModel>>();
@@ -93,8 +96,8 @@ namespace Genesys.Foundation.Test
         public void Process_ProcessResultSerialize()
         {
             // Initialize
-            String DataToSendSerialized = TypeExtension.DefaultString;
-            SessionContext Item1 = new SessionContext(this.ToString(), Guid.NewGuid().ToString(), "MyName");
+            var DataToSendSerialized = TypeExtension.DefaultString;
+            var Item1 = new SessionContext(this.ToString(), Guid.NewGuid().ToString(), "MyName");
             ISerializer<ISessionContext> Serializer1 = new JsonSerializer<ISessionContext>();
             ISerializer<SessionContext> Serializer2 = new JsonSerializer<SessionContext>();
 

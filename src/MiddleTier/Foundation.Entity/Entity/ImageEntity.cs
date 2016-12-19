@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ImageBase.cs" company="Genesys Source">
+// <copyright file="ImageEntity.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -22,7 +22,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using Genesys.Extensions;
 using Genesys.Extras.Mathematics;
-using Genesys.Foundation.Entity;
 
 namespace Genesys.Foundation.Entity
 {
@@ -37,12 +36,12 @@ namespace Genesys.Foundation.Entity
         /// <summary>
         /// 1x1px transparent image
         /// </summary>
-        public static Bitmap ImageEmpty { get; set; } = new Bitmap(0, 0);
+        public static Image Empty { get; set; } = new Bitmap(0, 0);
         
         /// <summary>
         /// 1x1px transparent image
         /// </summary>
-        public static Image NoImage
+        public static Image Transparent
         {
             get { return Genesys.Foundation.Entity.Properties.Resources.EmptyTransparent; }
         }
@@ -56,7 +55,7 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public Image Image
         {
-            get { return this.Bytes.ToImage(); }
+            get { return Bytes.ToImage(); }
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace Genesys.Foundation.Entity
         {
             get
             {
-                return this.Image.RawFormat.ToContentType();
+                return Image.RawFormat.ToContentType();
             }
         }
         
@@ -77,17 +76,17 @@ namespace Genesys.Foundation.Entity
             : base()
         {
             this.Initialize<ImageEntity<TEntity>>();
-            this.Bytes = ImageEntity<TEntity>.NoImage.ToBytes();
+            Bytes = ImageEntity<TEntity>.Transparent.ToBytes();
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="ImageBytes">Data to save</param>
-        public ImageEntity(byte[] ImageBytes)
+        /// <param name="imageBytes">Data to save</param>
+        public ImageEntity(byte[] imageBytes)
             : this()
         {
-            this.Bytes = ImageBytes;
+            Bytes = imageBytes;
         }
         
         /// <summary>
@@ -97,7 +96,7 @@ namespace Genesys.Foundation.Entity
         
         public TEntity ToSize(int newHeight)
         {            
-            TEntity returnValue = new TEntity();
+            var returnValue = new TEntity();
             int newWidth = TypeExtension.DefaultInteger;
             decimal multiplier = TypeExtension.DefaultDecimal;
 
@@ -113,7 +112,7 @@ namespace Genesys.Foundation.Entity
         /// <param name="newSize">New height and width</param>
         public TEntity ToSize(Size newSize)
         {
-            TEntity returnValue = new TEntity();
+            var returnValue = new TEntity();
 
             if ((this.Image == null == false) && (this.Image.Size.Width > 0 & this.Image.Size.Height > 0))
             {
@@ -124,11 +123,11 @@ namespace Genesys.Foundation.Entity
         }
         
         /// <summary>
-        /// Converts to a very lightweight thumbnail
+        /// Converts to a lightweight thumbnail
         /// </summary>
         public TEntity ToThumbnail()
         {
-            TEntity returnValue = new TEntity();
+            var returnValue = new TEntity();
             Image newImage = this.Image;
             Image thumbnail = newImage.GetThumbnailImage(this.Image.Width, this.Image.Height, new Image.GetThumbnailImageAbort(EmptyCallBack), IntPtr.Zero);
             returnValue.Bytes = thumbnail.ToBytes();
@@ -143,9 +142,10 @@ namespace Genesys.Foundation.Entity
         /// <param name="height">Height in px</param>
         public TEntity ToThumbnailInUpperLeftCorner(int width, int height)
         {
-            TEntity returnValue = new TEntity();
-            Image thumbnail = new Bitmap(this.Image, this.Image.Width, this.Image.Height);
-            Graphics graphicConvert = Graphics.FromImage(thumbnail);
+            var returnValue = new TEntity();
+            var thumbnail = new Bitmap(this.Image, this.Image.Width, this.Image.Height);
+            var graphicConvert = Graphics.FromImage(thumbnail);
+            var rectangleConvert = new Rectangle(0, 0, width, height);
 
             if ((this.Image == null == false) && (this.Image.Size.Width > 0 & this.Image.Size.Height > 0))
             {
@@ -153,7 +153,6 @@ namespace Genesys.Foundation.Entity
                 graphicConvert.CompositingQuality = CompositingQuality.HighQuality;
                 graphicConvert.SmoothingMode = SmoothingMode.HighQuality;
                 graphicConvert.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                Rectangle rectangleConvert = new Rectangle(0, 0, width, height);
                 graphicConvert.DrawImage(this.Image, rectangleConvert);
                 returnValue.Bytes = thumbnail.ToBytes();
             }
@@ -178,7 +177,7 @@ namespace Genesys.Foundation.Entity
         /// <param name="y">Starting Y</param>
         public Byte[] Crop(int width, int height, int x, int y)
         {
-            return this.Image.Crop(width, height, x, y).ToBytes();
+            return Image.Crop(width, height, x, y).ToBytes();
         }
     }
 }
