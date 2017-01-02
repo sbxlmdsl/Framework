@@ -54,9 +54,11 @@
     <Compile Include="Device\IApplicationUUID.cs" />
     <Compile Include="Device\IDeviceUUID.cs" />
     <Compile Include="Entity\ICreatedDate.cs" />
+    <Compile Include="Entity\ICode.cs" />
     <Compile Include="Entity\IModifiedDate.cs" />
     <Compile Include="Entity\IEntityKey.cs" />
     <Compile Include="Entity\IKey.cs" />
+    <Compile Include="Name\INameCode.cs" />
     <Compile Include="Process\KeyParameter.cs" />
     <Compile Include="Exception\IExceptionLog.cs" />
     <Compile Include="Name\INameKey.cs" />
@@ -95,12 +97,12 @@
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Genesys.Extensions.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rp1\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extensions.Universal, Version=3.0.12.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.12-rc2\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extras.Universal, Version=3.0.11.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.11-rp1\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extras.Universal, Version=3.0.12.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.0.12-rc2\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

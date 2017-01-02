@@ -22,6 +22,8 @@ using System.ComponentModel;
 using System.Reflection;
 using Genesys.Extensions;
 using Genesys.Extras.Serialization;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace Genesys.Foundation.Entity
 {
@@ -32,44 +34,64 @@ namespace Genesys.Foundation.Entity
 	[CLSCompliant(true)]
 	public abstract class ModelEntity<TModel> : IID, IKey, INotifyPropertyChanged where TModel : ModelEntity<TModel>, new()
 	{
+        private int idField = TypeExtension.DefaultInteger;
+        private Guid keyField = TypeExtension.DefaultGuid;
         /// <summary>
         /// Primary key of this record. Internal use only, use Key when exposing data externally.
         /// </summary>
-        public virtual int ID { get; set; } = TypeExtension.DefaultInteger;
+        public virtual int ID { get { return idField; } set { SetField(ref idField, value); } }
 
         /// <summary>
         /// Primary key of this record. To be used for external use.
         /// </summary>
-        public virtual Guid Key { get; set; } = TypeExtension.DefaultGuid;
+        public virtual Guid Key { get { return keyField; } set { SetField(ref keyField, value); } }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public ModelEntity() : base() { this.Initialize<ModelEntity<TModel>>(); }
-		
-        /// <summary>
-        /// Fired when property is changed
-        /// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
 
-		/// <summary>
-		/// Save and raise changed event
-		/// </summary>
-		/// <param name="propertyName"></param>
-		/// <remarks></remarks>
-		protected void NotifyPropertyChanged(string propertyName)
-		{
-			if (PropertyChanged != null) {
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		/// <summary>
-		/// Fills this object with another object's data (of the same type)
-		/// </summary>
-		/// <param name="newItem"></param>
-		/// <remarks></remarks>
-		public bool Equals(TModel newItem)
+        /// <summary>
+        /// Property changed event handler for INotifyPropertyChanged
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Property changed event for INotifyPropertyChanged
+        /// </summary>
+        /// <param name="propertyName">String name of property</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Sets the property data as well as fired OnPropertyChanged() for INotifyPropertyChanged
+        /// </summary>
+        /// <typeparam name="TField"></typeparam>
+        /// <param name="field"></param>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected bool SetField<TField>(ref TField field, TField value,
+        [CallerMemberName] string propertyName = null)
+        {
+            var returnValue = TypeExtension.DefaultBoolean;
+            if (EqualityComparer<TField>.Default.Equals(field, value) == false)
+            {
+                field = value;
+                OnPropertyChanged(propertyName);
+                returnValue = true;
+            }                
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Fills this object with another object's data (of the same type)
+        /// </summary>
+        /// <param name="newItem"></param>
+        /// <remarks></remarks>
+        public bool Equals(TModel newItem)
 		{
 			bool returnValue = TypeExtension.DefaultBoolean;
 			Type newObjectType = newItem.GetType();
