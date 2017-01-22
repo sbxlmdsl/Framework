@@ -7,10 +7,10 @@ SET FullPath=%1
 SET FullPath=%FullPath:"=%
 
 ECHO ** PreBuild.bat **
-ECHO Executing "%FullPath%EFPartial.ps1" -Parameter1 "%FullPath%"
+ECHO Executing "%FullPath%EFPartial.ps1" -Path "%FullPath%"
 
 %WINDIR%\system32\attrib.exe "%FullPath%*.cs" -r
-%WINDIR%\SysWOW64\WindowsPowerShell\v1.0\Powershell.exe Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
-%WINDIR%\SysWOW64\WindowsPowerShell\v1.0\Powershell.exe -File "%FullPath%EFPartial.ps1" -Parameter1 "%FullPath%"
+%WINDIR%\SysWOW64\WindowsPowerShell\v1.0\Powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force
+%WINDIR%\SysWOW64\WindowsPowerShell\v1.0\Powershell.exe -File "%FullPath%EFPartial.ps1" -Path "%FullPath%"
 %WINDIR%\system32\attrib.exe "%FullPath%*.cs" +r
 exit 0

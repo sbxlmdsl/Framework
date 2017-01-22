@@ -1,20 +1,20 @@
 ﻿# Parameters
-param([String]$Parameter1=".\")
+param([String]$Path=".\")
 
 # Initialize
-Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+#Set-ExecutionPolicy Unrestricted -Scope Process -Force
 [String]$ThisScript = $MyInvocation.MyCommand.Path
 [String]$ThisDir = Split-Path $ThisScript
 Set-Location $ThisDir # Ensure our location is correct, so we can use relative paths
 
 # Initialize
-$Parameter1=$Parameter1.Replace("`"","")
+$Path=$Path.Replace("`"","")
 
 # Relay parameter to output
-Write-Output "Parameter1: $Parameter1"
+Write-Output "Path: $Path"
 
 # Add override to allow partial class extension of the EF generated files
-$configFiles=get-childitem -Path "$Parameter1\*.cs"
+$configFiles=get-childitem -Path "$Path\*.cs"
 foreach ($file in $configFiles)
 {
 	(Get-Content $file.PSPath) | 
