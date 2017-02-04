@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
@@ -102,27 +102,5 @@ Global
 		{18775C40-E495-40F4-8E1A-BD8DF03032A7} = {5DD41613-BD2B-4912-968E-6C3E68E99A5D}
 		{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5} = {3BD9F409-C1AA-4548-8210-E79D610C0977}
 		{1728590D-71DC-447F-B35E-339BFFA8DD33} = {5DD41613-BD2B-4912-968E-6C3E68E99A5D}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://vgo-tfs-02:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MiddleTier\\Foundation.Entity\\Genesys.Foundation.Entity.csproj
-		SccProjectTopLevelParentUniqueName1 = Foundation.sln
-		SccProjectName1 = MiddleTier/Foundation.Entity
-		SccLocalPath1 = MiddleTier\\Foundation.Entity
-		SccProjectUniqueName2 = PresentationTier\\Foundation.Models\\Genesys.Foundation.Models.csproj
-		SccProjectTopLevelParentUniqueName2 = Foundation.sln
-		SccProjectName2 = PresentationTier/Foundation.Models
-		SccLocalPath2 = PresentationTier\\Foundation.Models
-		SccProjectUniqueName3 = Test\\Foundation.Test\\Genesys.Foundation.Test.csproj
-		SccProjectTopLevelParentUniqueName3 = Foundation.sln
-		SccProjectName3 = Test/Foundation.Test
-		SccLocalPath3 = Test\\Foundation.Test
-		SccProjectUniqueName4 = MiddleTier\\Foundation.Interfaces\\Genesys.Foundation.Interfaces.csproj
-		SccProjectTopLevelParentUniqueName4 = Foundation.sln
-		SccProjectName4 = MiddleTier/Foundation.Interfaces
-		SccLocalPath4 = MiddleTier\\Foundation.Interfaces
 	EndGlobalSection
 EndGlobal
