@@ -40,7 +40,7 @@ namespace Genesys.Extras.Exceptions
         private Exception currentException = new System.Exception("No Exception");
 
         /// <summary>
-        /// Connection string key name, from Web.config or Local\ConnectionStrings.config
+        /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
         /// Default is MyLogConnection
         /// </summary>
         protected string ConnectionStringName { get; set; } = "MyLogConnection";

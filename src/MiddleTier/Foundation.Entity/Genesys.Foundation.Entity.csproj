@@ -113,6 +113,13 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="App_Data\AppSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App_Data\ConnectionStrings.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="EFPartial.ps1" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

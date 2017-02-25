@@ -38,7 +38,7 @@ namespace Genesys.Foundation.Activity
     public class ActivityLogger : Activity
     {
         /// <summary>
-        /// Connection string key name, from Web.config or Local\ConnectionStrings.config
+        /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
         /// Default is MyDataConnection
         /// </summary>
         protected virtual string ConnectionStringName { get; set; } = "MyDataConnection";
