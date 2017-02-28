@@ -31,7 +31,7 @@ namespace Genesys.Foundation.Data
     {
         /// <summary>
         /// Name supplied by attribute. 
-        /// Default is MyDataConnection
+        /// Default is DefaultConnection
         /// </summary>
         public string Value { get; set; } = "dbo";
 

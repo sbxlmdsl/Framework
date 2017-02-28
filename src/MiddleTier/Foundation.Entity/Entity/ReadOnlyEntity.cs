@@ -39,7 +39,7 @@ namespace Genesys.Foundation.Entity
     [CLSCompliant(true)]
     public abstract class ReadOnlyEntity<TEntity> : Validator<TEntity>, IReadOnlyEntity where TEntity : ReadOnlyEntity<TEntity>, new()
     {
-        private const string connectionStringDefault = "MyCodeConnection";
+        private const string connectionStringDefault = "DefaultConnection";
         
         /// <summary>
         /// ID of record
@@ -99,7 +99,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("ReadOnlyEntityBase.GetByID({0})", id.ToString()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("ReadOnlyEntityBase.GetByID({0})", id.ToString()), "DefaultConnection", "MiddleTier");
             }
 
             return returnValue;
@@ -124,7 +124,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("ReadOnlyEntityBase.GetByKey({0})", Key.ToString()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("ReadOnlyEntityBase.GetByKey({0})", Key.ToString()), "DefaultConnection", "MiddleTier");
             }
 
             return returnValue;
@@ -145,7 +145,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyEntityBase.GetAll()", "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyEntityBase.GetAll()", "DefaultConnection", "MiddleTier");
             }
             
             return returnValue;

@@ -29,7 +29,7 @@ namespace Genesys.Extras.Exceptions
 {
     /// <summary>
     /// Code-first class that records exceptions to a 100% uptime database
-    /// Default connection string is: MyLogConnection. 
+    /// Default connection string is: DefaultConnection. 
     /// Can be changed via passing new ConnectionString name to the constructor
     /// </summary>
     /// <remarks></remarks>
@@ -41,9 +41,9 @@ namespace Genesys.Extras.Exceptions
 
         /// <summary>
         /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
-        /// Default is MyLogConnection
+        /// Default is DefaultConnection
         /// </summary>
-        protected string ConnectionStringName { get; set; } = "MyLogConnection";
+        protected string ConnectionStringName { get; set; } = "DefaultConnection";
 
         /// <summary>
         /// Database schema name

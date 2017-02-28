@@ -35,11 +35,11 @@ namespace Genesys.Extensions.Test
         public void Exceptions_ExceptionLogger()
         {                        
             // Genesys Framework default schema
-            ExceptionLogger log1 = new ExceptionLogger("MyLogConnection", "Activity");
+            ExceptionLogger log1 = new ExceptionLogger("DefaultConnection", "Activity");
             log1.Save();
             Assert.IsTrue(log1.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
             // Your custom schema
-            ExceptionLogger log2 = new ExceptionLogger("MyLogConnection", "MySchema");
+            ExceptionLogger log2 = new ExceptionLogger("DefaultConnection", "MySchema");
             log2.Save();
             Assert.IsTrue(log2.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
         }

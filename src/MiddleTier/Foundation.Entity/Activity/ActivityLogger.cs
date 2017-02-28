@@ -30,7 +30,7 @@ namespace Genesys.Foundation.Activity
 {
     /// <summary>
     /// Code-first class that records exceptions to a 100% uptime database
-    /// Default connection string is: MyDataConnection. 
+    /// Default connection string is: DefaultConnection. 
     /// Can be changed via passing new ConnectionString name to the constructor
     /// </summary>
     /// <remarks></remarks>
@@ -39,9 +39,9 @@ namespace Genesys.Foundation.Activity
     {
         /// <summary>
         /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
-        /// Default is MyDataConnection
+        /// Default is DefaultConnection
         /// </summary>
-        protected virtual string ConnectionStringName { get; set; } = "MyDataConnection";
+        protected virtual string ConnectionStringName { get; set; } = "DefaultConnection";
 
         /// <summary>
         /// Database schema name

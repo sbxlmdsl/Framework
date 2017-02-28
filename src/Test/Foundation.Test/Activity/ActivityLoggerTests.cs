@@ -34,7 +34,7 @@ namespace Genesys.Extensions.Test
         [TestMethod()]
         public void Activity_ActivityLogger()
         {
-            ActivityLogger log = new ActivityLogger("MyDataConnection", "Activity");
+            ActivityLogger log = new ActivityLogger("DefaultConnection", "Activity");
             log.Save();
             Assert.IsTrue(log.ActivityID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
         }

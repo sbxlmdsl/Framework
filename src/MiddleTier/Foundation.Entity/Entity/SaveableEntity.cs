@@ -41,7 +41,7 @@ namespace Genesys.Foundation.Entity
     public abstract class SaveableEntity<TEntity> : Validator<SaveableEntity<TEntity>>, ISaveableEntity
         where TEntity : SaveableEntity<TEntity>, new()
     {
-        private const string connectionStringDefault = "MyCodeConnection";
+        private const string connectionStringDefault = "DefaultConnection";
 
         /// <summary>
         /// ID of record
@@ -127,7 +127,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.GetByID({0})", id.ToString()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.GetByID({0})", id.ToString()), "DefaultConnection", "MiddleTier");
 #if (DEBUG)
                 throw;
 #endif
@@ -154,7 +154,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.GetByKey({0})", Key.ToString()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.GetByKey({0})", Key.ToString()), "DefaultConnection", "MiddleTier");
             }
 
             return returnValue;
@@ -175,7 +175,7 @@ namespace Genesys.Foundation.Entity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), "SaveableEntity.GetAll()", "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), "SaveableEntity.GetAll()", "DefaultConnection", "MiddleTier");
 #if (DEBUG)
                 throw;
 #endif
@@ -238,8 +238,8 @@ namespace Genesys.Foundation.Entity
             {
                 if (Equals(new TEntity()) == false)
                 {
-                    if (ActivityLogger.GetByID(this.ActivityID, "MyDataConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
-                        { ActivityID = ActivityLogger.Create("MyDataConnection", "Activity"); } // All database commits require activity of some sort
+                    if (ActivityLogger.GetByID(this.ActivityID, "DefaultConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
+                        { ActivityID = ActivityLogger.Create("DefaultConnection", "Activity"); } // All database commits require activity of some sort
                     if (IsNew == true || forceInsert == true || dbContext.DataAccessBehavior() == DataAccessBehaviorValues.InsertOnly)
                     {
                         if (dbContext.DataAccessBehavior() == DataAccessBehaviorValues.SelectOnly)
@@ -274,7 +274,7 @@ namespace Genesys.Foundation.Entity
 #if DEBUG
                 System.Diagnostics.Debugger.Break();
 #endif
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("{0}.Save() in SaveableEntity", this.GetType().ToStringSafe()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("{0}.Save() in SaveableEntity", this.GetType().ToStringSafe()), "DefaultConnection", "MiddleTier");
                 if (ThrowException) throw;
             }
             finally
@@ -308,9 +308,9 @@ namespace Genesys.Foundation.Entity
             {
                 if (ID != TypeExtension.DefaultInteger)
                 {
-                    if (ActivityLogger.GetByID(this.ActivityID, "MyDataConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
+                    if (ActivityLogger.GetByID(this.ActivityID, "DefaultConnection", "Activity").ActivityID == TypeExtension.DefaultInteger)
                     {
-                        ActivityID = ActivityLogger.Create("MyDataConnection", new TEntity().GetAttributeValue<DatabaseSchemaAttribute>("Activity"));
+                        ActivityID = ActivityLogger.Create("DefaultConnection", new TEntity().GetAttributeValue<DatabaseSchemaAttribute>("Activity"));
                     } // All database commits require activity of some sort
                     if ((dbContext.DataAccessBehavior() == DataAccessBehaviorValues.InsertOnly) & (dbContext.DataAccessBehavior() == DataAccessBehaviorValues.SelectOnly))
                     {
@@ -328,7 +328,7 @@ namespace Genesys.Foundation.Entity
 #if DEBUG
                 System.Diagnostics.Debugger.Break();
 #endif
-                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.Delete() on {0}", this.ToString()), "MyLogConnection", "MiddleTier");
+                ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.Delete() on {0}", this.ToString()), "DefaultConnection", "MiddleTier");
                 if (ThrowException) throw;
             }
             finally
@@ -473,7 +473,7 @@ namespace Genesys.Foundation.Entity
                 }
                 catch (Exception ex)
                 {
-                    ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.SaveChanges() on {0}", this.ToString()), "MyLogConnection", "MiddleTier");
+                    ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableEntity.SaveChanges() on {0}", this.ToString()), "DefaultConnection", "MiddleTier");
                     if (ThrowException == true)
                     {
                         throw;
