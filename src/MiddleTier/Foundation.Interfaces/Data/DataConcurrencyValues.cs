@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="DataConcurrencyValues.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -17,34 +17,30 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
+using System;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// enumeration to allow the attribute to use strongly-typed ID
     /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+    [CLSCompliant(true)]
+    public enum DataConcurrencyValues
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// Forces clean read of committed data, will not read uncommitted data
+        /// Will wait for commits to finish, can be blocked
+        /// This entity will re-pull itself from the database after a save, insert then fully reselect to ensure data integrity
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
-        {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-        }
+        Pessimistic = 0,
+        
+        /// <summary>
+        /// allows dirty reads of uncommitted data
+        /// Can not be blocked by other processes commits
+        /// This entity will not re-pull itself from the database after a save call.
+        /// After a save, any data changes in the data tier will not be reflected in the object
+        /// </summary>
+        Optimistic = 1,
     }
+    
 }

@@ -24,7 +24,7 @@ using System.Reflection;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using Genesys.Extensions;
-using Genesys.Extras.Exceptions;
+using Genesys.Foundation.Activity;
 using Genesys.Extras.Serialization;
 using Genesys.Extras.Configuration;
 using Genesys.Foundation.Data;
@@ -141,7 +141,7 @@ namespace Genesys.Foundation.Entity
 
             try
             {
-                returnValue = dbContext.EntityData;
+                returnValue = dbContext.EntityData.Take(new TEntity().GetAttributeValue<TakeRows, int>(100));
             }
             catch (Exception ex)
             {
@@ -217,7 +217,7 @@ namespace Genesys.Foundation.Entity
             ConnectionStringSafe configConnectString = new ConnectionStringSafe();
             ConfigurationManagerFull configManager = new ConfigurationManagerFull();
 
-            configConnectString = configManager.ConnectionString(new TEntity().GetAttributeValue<ConnectionStringAttribute>(connectionStringDefault));
+            configConnectString = configManager.ConnectionString(new TEntity().GetAttributeValue<ConnectionString>(connectionStringDefault));
             returnValue = configConnectString.ToEF(typeof(TEntity));
             if (returnValue == TypeExtension.DefaultString) { throw new System.Exception("Connection string could not be found. A valid connection string required for data access."); }
 

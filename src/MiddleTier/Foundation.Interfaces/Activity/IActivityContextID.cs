@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="IActivityContextID.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -17,34 +17,20 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
+using System;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Activity
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// Activity that tracks any interaction with the framework
+    /// Particularly CRUD and Workflow operations.
     /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+	[CLSCompliant(true)]
+    public interface IActivityContextID 
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// ID of the activity that tracks a transaction type process, typically querying or committing data
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
-        {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-        }
-    }
+        int ActivityContextID { get; set; }
+	}
 }

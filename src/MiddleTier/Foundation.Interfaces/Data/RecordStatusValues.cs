@@ -18,28 +18,37 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using Genesys.Extensions;
 
 namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// Connection string Attribute
+    /// Status of the records current state. Can be multiple values to reduce collisions and maintain independent behavior on a per-value basis.
+    /// Note: This is a [Flags] decorated enum. Values MUST be bitwise friendly (1, 2, 4, 8, 16, 32, etc.) 
+    ///     None must be 0, and excluded from bitwise operations
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class), CLSCompliant(true)]
-    public class RecordStatus : Attribute, IAttributeValue<RecordStatusValues>
+    /// <remarks></remarks>
+    [CLSCompliant(true)]
+    [Flags]
+    public enum RecordStatusValues
     {
         /// <summary>
-        /// Value of attribute
+        /// Normal behavior: Allows all querying and changes.
         /// </summary>
-        public RecordStatusValues Value { get; set; } = RecordStatusValues.Default;
+        Default = 0x0,
 
         /// <summary>
-        /// Constructor
+        /// ReadOnly: Do not allow to be changed. Ignore and log any change request. Alert calling app that record is read only (can be changed back to default to be altered later, not historical.)
         /// </summary>
-        /// <param name="value">Value to hydrate</param>
-        public RecordStatus(RecordStatusValues value)
-        {
-            Value = value;
-        }
+        ReadOnly = 0x1,
+
+        /// <summary>
+        /// Record now historical. This record can never be updated, and will now be excluded out of all re-calculations (becomes a line item to feed historical counts.)
+        /// </summary>
+        Historical = 0x2,
+
+        /// <summary>
+        /// Deleted: This record is deleted and to be considered non-existent, even in historical re-calculations (will make historical counts shift.)
+        /// </summary>
+        Deleted = 0x2,
     }
 }

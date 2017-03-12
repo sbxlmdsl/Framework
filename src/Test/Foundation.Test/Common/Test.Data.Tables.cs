@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="MyApplication.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
+// 
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
 //      this work for additional information regarding copyright ownership.
@@ -17,34 +18,41 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
 using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
+using System.Data.SqlClient;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Test.Data
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// Utility methods for table
     /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+    public class Tables
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// Removes EF code-first migration history table
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
+        /// <param name="database"></param>
+        /// <param name="schema"></param>
+        public static void DropMigrationHistory(string database = "[FrameworkData]", string schema = "[Activity]")
         {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            // Must remove __MigrationHistory for EF Code First objects to auto-create their tables
+            var configuration = new ConfigurationManagerFull();
+
+            try
+            {
+                using (var connection = new SqlConnection(configuration.ConnectionStringValue("DefaultConnection")))
+                {
+                    using (var command = new SqlCommand("Drop Table " + database + "." + schema + ".[__MigrationHistory]", connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                // Ignore connection errors
+            }
         }
     }
 }

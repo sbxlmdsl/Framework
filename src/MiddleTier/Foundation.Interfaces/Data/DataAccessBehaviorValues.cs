@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="DataAccessBehaviorValues.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -17,34 +17,34 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
+using System;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// enumeration to allow the attribute to use strongly-typed ID
     /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+    [CLSCompliant(true)]
+    public enum DataAccessBehaviorValues
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// All Select, Insert, Update and Delete functionality
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
-        {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-        }
-    }
+        AllAccess = 0,
+
+        /// <summary>
+        /// Insert functionality
+        /// </summary>
+        InsertOnly = 1,
+
+        /// <summary>
+        /// Select functionality
+        /// </summary>
+        SelectOnly = 2,
+
+        /// <summary>
+        /// Select, Insert and Delete functionality
+        /// </summary>
+        NoUpdate = 3
+    }    
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLogger.cs" company="Genesys Source">
+// <copyright file="ExceptionLogFull.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 // 
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
@@ -33,60 +33,106 @@ namespace Genesys.Foundation.Activity
     /// Can be changed via passing new ConnectionString name to the constructor
     /// </summary>
     /// <remarks></remarks>
-    [CLSCompliant(true)]
-    public class ActivityLogger : ActivityContext
+    [CLSCompliant(true)]    
+    public class ExceptionLogger : ExceptionLog
     {
+        private Uri endpointUrl = new Uri(TypeExtension.DefaultUri);
+        private Exception currentException = new System.Exception("No Exception");
+
         /// <summary>
         /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
         /// Default is DefaultConnection
         /// </summary>
-        protected virtual string ConnectionStringName { get; set; } = "DefaultConnection";
+        protected string ConnectionStringName { get; set; } = "DefaultConnection";
 
         /// <summary>
         /// Database schema name
         /// Default is dbo
         /// </summary>
-        protected virtual string DatabaseSchemaName { get; set; } = "Activity";
+        protected string DatabaseSchemaName { get; set; } = "Activity";
+
+        /// <summary>
+        /// The Activity record that was processing when this exception occurred
+        /// </summary>
+        public int CreatedActivityID { get; set; } = TypeExtension.DefaultInteger;
+
+        /// <summary>
+        /// MachineName
+        /// </summary>
+        public string MachineName { get { return Environment.MachineName; } }
+
+        /// <summary>
+        /// ADDomainName
+        /// </summary>
+        public string ADDomainName { get { return Environment.UserDomainName; } protected set { } }
+
+        /// <summary>
+        /// ADUserName
+        /// </summary>
+        public string ADUserName { get { return Environment.UserName; } protected set { } }
+
+        /// <summary>
+        /// DirectoryWorking
+        /// </summary>
+        public string DirectoryWorking { get { return Environment.CurrentDirectory; } protected set { } }
+
+        /// <summary>
+        /// DirectoryAssembly
+        /// </summary>
+        public string DirectoryAssembly { get { return Assembly.GetExecutingAssembly().Location; } protected set { } }
+
+        /// <summary>
+        /// ApplicationName
+        /// </summary>
+        public string AssemblyName { get { return Assembly.GetExecutingAssembly().FullName; } protected set { } }
+
+        /// <summary>
+        /// URL
+        /// </summary>
+        public string URL { get { return endpointUrl.ToString(); } protected set { } }
 
         /// <summary>
         /// This protected constructor should not be called. Factory methods should be used instead.
         /// </summary>
-        protected ActivityLogger() : base()
-        {
-            ExecutingContext = ExecutingContextInfo();
-            StackTrace = Environment.StackTrace;
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="connectStringName">Key/Name of the connection string in the .config file or database</param>
-        /// <remarks></remarks>
-        public ActivityLogger(string connectStringName) : this()
-        {
-            ConnectionStringName = connectStringName;
-        }
+        protected ExceptionLogger() : base() { CreatedDate = DateTime.UtcNow; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="connectStringName"></param>
-        /// <param name="databaseSchemaName"></param> 
         /// <remarks></remarks>
-        public ActivityLogger(string connectStringName, string databaseSchemaName) : this(connectStringName)
+        public ExceptionLogger(string connectStringName) : this()
         {
-            DatabaseSchemaName = databaseSchemaName;
+            ConnectionStringName = connectStringName;
         }
 
         /// <summary>
-        /// Hydrates object and saves the record 
+        /// Creates Exception object
         /// </summary>
-        public static int Create(string connectStringName, string databaseSchema)
+        /// <param name="connectStringName"></param>
+        /// <param name="databaseSchema"></param>
+        public ExceptionLogger(string connectStringName, string databaseSchema) : this(connectStringName) { DatabaseSchemaName = databaseSchema; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="concreteType"></param>
+        /// <param name="customMessage"></param>
+        public ExceptionLogger(Exception exception, Type concreteType, string customMessage) : base(exception, concreteType, customMessage) { }
+
+        /// <summary>
+        /// Hydrates object and saves the log record
+        /// </summary>
+        /// <param name="exception">System.Exception object to log</param>
+        /// <param name="concreteType">Type that is logging the exception</param>
+        /// <param name="customMessage">Custom message to append to the exception log</param>
+        /// <param name="connectStringName">Key name of connection string in config</param>
+        /// <param name="databaseSchema">Database schema name</param>
+        public static void Create(Exception exception, Type concreteType, string customMessage, string connectStringName, string databaseSchema)
         {
-            var log = new ActivityLogger();
-            log.ConnectionStringName = connectStringName;
-            log.DatabaseSchemaName = databaseSchema;
-            return log.Save();
+            ExceptionLogger log = new ExceptionLogger(exception, concreteType, customMessage) { ConnectionStringName = connectStringName, DatabaseSchemaName = databaseSchema };
+            log.Save();
         }
 
         /// <summary>
@@ -95,21 +141,21 @@ namespace Genesys.Foundation.Activity
         /// <param name="id">The unique ID of the object</param>
         /// <param name="connectStringName">Key of the config value for this actions connection string</param>
         /// <param name="databaseSchema">Database Schema that owns the Activity table</param>
-        public static ActivityContext GetByID(int id, string connectStringName, string databaseSchema)
+        public static ExceptionLog GetByID(int id, string connectStringName, string databaseSchema)
         {
-            var returnValue = new ActivityContext();
+            ExceptionLog returnValue = new ExceptionLog();
             var dbContext = new DatabaseContext(connectStringName, databaseSchema);
 
             try
             {
                 if (id != TypeExtension.DefaultInteger)
                 {
-                    returnValue = dbContext.EntityData.Where(x => x.ActivityContextID == id).FirstOrDefaultSafe();
+                    returnValue = dbContext.EntityData.Where(x => x.ExceptionLogID == id).FirstOrDefaultSafe();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(ActivityContext), String.Format("ActivityLogger.GetByID({0})", id.ToString()), connectStringName, databaseSchema);
+                ExceptionLogger.Create(ex, typeof(ExceptionLog), String.Format("ExceptionLogger.GetByID({0})", id.ToString()), connectStringName, databaseSchema);
             }
 
             return returnValue;
@@ -120,64 +166,37 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         public virtual int Save()
         {
-            var dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName);
-
-            try
+            using (DatabaseContext dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName))
             {
-                if (ActivityContextID == TypeExtension.DefaultInteger)
+                try
                 {
-                    ExecutingContext = ExecutingContextInfo();
-                    dbContext.EntityData.Add(this);
-                    dbContext.SaveChanges();
+                    if (ExceptionLogID == TypeExtension.DefaultInteger)
+                    {
+                        dbContext.EntityData.Add(this);
+                        dbContext.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CurrentException = ex; // Never let save errors propagate, else endless loop
                 }
             }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                dbContext.Dispose();
-            }
-
-            return ActivityContextID;
+                
+            return ExceptionLogID;
         }
-
-        /// <summary>
-        /// Builds runtime context in the format of: Assembly FQN || Executing location || Machine Name - Domain\User
-        /// </summary>
-        /// <returns></returns>
-        private string ExecutingContextInfo()
-        {
-            var returnValue = TypeExtension.DefaultString;
-
-            try
-            {
-                returnValue = String.Format(@"{0} || {1} || {2} - {3}\{4}",
-                    Assembly.GetExecutingAssembly().FullName,
-                    Assembly.GetExecutingAssembly().Location,
-                    Environment.MachineName, Environment.UserDomainName, Environment.UserName);
-            }
-            catch
-            {
-                returnValue = TypeExtension.DefaultString;
-            }
-
-            return returnValue;
-        }
-
+        
         /// <summary>
         /// DB Context - Entity Framework uses this to connect to the database
         /// </summary>
         protected class DatabaseContext : System.Data.Entity.DbContext
         {
-            private string databaseSchemaField = TypeExtension.DefaultString;
-
+            private string databaseSchemaField = "dbo";
+            
             /// <summary>
-            /// BusinessEntity
+            /// BusinessEntity - Determines table and columns
             /// </summary>
-            public System.Data.Entity.DbSet<ActivityContext> EntityData { get; set; }
-
+            public System.Data.Entity.DbSet<ExceptionLog> EntityData { get; set; }
+            
             /// <summary>
             /// Constructor. Explicitly set database connection.
             /// </summary>
@@ -195,7 +214,7 @@ namespace Genesys.Foundation.Activity
             {
                 return base.SaveChanges();
             }
-
+            
             /// <summary>
             /// Set values when creating a model in the database
             /// </summary>
@@ -208,13 +227,13 @@ namespace Genesys.Foundation.Activity
                 modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
             }
         }
-
+         
         /// <summary>
         /// Initializes the database
         /// </summary>
         public void Initialize()
         {
-            System.Data.Entity.Database.SetInitializer<DatabaseContext>((global::System.Data.Entity.IDatabaseInitializer<ActivityLogger.DatabaseContext>)new DatabaseInitializer());
+            System.Data.Entity.Database.SetInitializer<DatabaseContext>((global::System.Data.Entity.IDatabaseInitializer<ExceptionLogger.DatabaseContext>)new DatabaseInitializer());
         }
 
         /// <summary>
@@ -230,8 +249,7 @@ namespace Genesys.Foundation.Activity
             protected override void Seed(DatabaseContext context)
             {
                 base.Seed(context);
-            }
-        }
-
+            }            
+        }        
     }
 }

@@ -25,11 +25,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Genesys Framework Quick-Start Interfaces")]
-[assembly: AssemblyDescription("Genesys Framework Quick-Start foundation classes bring code reusability to your ASP.NET MVC web apps, ASP.NET Web Forms web apps, ASP.NET Web API web services, WPF desktop apps, PCL libraries, and UWP cross-platform mobile apps.")]
+[assembly: AssemblyTitle("Genesys Source Quick-Start Interfaces")]
+[assembly: AssemblyDescription("Genesys Source Quick-Start foundation classes bring code reusability to your ASP.NET MVC web apps, ASP.NET Web Forms web apps, ASP.NET Web API web services, WPF desktop apps, PCL libraries, and UWP cross-platform mobile apps.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Genesys Source")]
-[assembly: AssemblyProduct("Genesys Framework Quick-Start foundation classes for .Net Core and .Net Full")]
+[assembly: AssemblyProduct("Genesys Source Quick-Start foundation classes for .Net Core and .Net Full")]
 [assembly: AssemblyCopyright("Copyright © 2017 Genesys Source. All rights reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -51,8 +51,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("3.17.01")]
-[assembly: AssemblyFileVersion("3.17.01")]
+[assembly: AssemblyVersion("3.17.04")]
+[assembly: AssemblyFileVersion("3.17.04")]
 
 // Must add this to every AssemblyInfo.cs that wants to be compliant
 [assembly: System.CLSCompliant(true)]

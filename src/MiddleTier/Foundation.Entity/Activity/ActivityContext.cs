@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityModel.cs" company="Genesys Source">
+// <copyright file="Activity.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -27,7 +27,7 @@ namespace Genesys.Foundation.Activity
     /// </summary>
     /// <remarks></remarks>
     [CLSCompliant(true)]
-    public class ActivityModel : IActivityContext
+    public class ActivityContext : IActivityContext
     {
         private string identityUserName = TypeExtension.DefaultString;
         private string principalIP4Address = TypeExtension.DefaultString;
@@ -73,7 +73,7 @@ namespace Genesys.Foundation.Activity
         /// PrincipalIP4Address
         /// </summary>
         public string PrincipalIP4Address
-        {
+        { 
             get { return principalIP4Address; }
             set { principalIP4Address = value.SubstringLeft(15); }
         }
@@ -113,8 +113,8 @@ namespace Genesys.Foundation.Activity
         /// <summary>
         /// CreatedDate
         /// </summary>
-        public DateTime CreatedDate { get; set; } = TypeExtension.DefaultDate;
-
+        public DateTime CreatedDate { get; set; } = TypeExtension.DefaultDate;           
+        
         /// <summary>
         /// Returns the typed string of the primary property.
         /// </summary>

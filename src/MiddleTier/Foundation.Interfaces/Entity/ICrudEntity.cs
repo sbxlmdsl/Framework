@@ -27,43 +27,38 @@ namespace Genesys.Foundation.Entity
     /// <summary>
     /// Data access entity that can be saved
     /// </summary>
+    /// <typeparam name="TEntity">Type of class supporting CRUD methods</typeparam>
     [CLSCompliant(true)]
-    public interface ISaveableEntity : IEntity
+    public interface ICrudEntity<TEntity> : ISaveableEntity
     {
         /// <summary>
-        /// Is a new object, and most likely not yet committed to the database
+        /// Create the object
         /// </summary>
-        bool IsNew { get; }
+        /// <returns></returns>
+        ICrudEntity<TEntity> Create();
 
         /// <summary>
-        /// ActivityFlowID
+        /// Retrieve the object
         /// </summary>
-        int ActivityID { get; set; }
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        IEnumerable<TEntity> Read(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
-        /// Deletes this object with Workflow-based tracking.
-        /// More complicated than Delete(), but verbose logged info and ensures full-tiered architecture
+        /// Update the object
         /// </summary>
-        /// <param name="activity">Activity record that tracks this operation</param>
-        bool Delete(IActivityContext activity);
+        ICrudEntity<TEntity> Update();
 
         /// <summary>
-        /// Worker method that deletes this object with automatic tracking.
-        /// Less complicated than Delete(IActivity), but only minimal data logged
+        /// Deletes this object with automatic tracking.
+        /// Less complicated than Delete(IActivity), but minimal data logged and free-form architecture
         /// </summary>
-        bool Delete(bool forceDelete);
+        ICrudEntity<TEntity> Delete();
 
         /// <summary>
-        /// Inserts or updates this object with flow-based tracking.
-        /// More complicated than Save(), but verbose logged info and ensures full-tiered architecture
+        /// Inserts or updates this object with automatic tracking.
+        /// Less complicated than Save(IActivity), but minimal data logged and free-form architecture
         /// </summary>
-        /// <param name="activity">Activity record that tracks this operation</param>
-        bool Save(IActivityContext activity);
-
-        /// <summary>
-        /// Worker method that inserts or updates this object with automatic tracking.
-        /// Less complicated than Save(IActivity), but only minimal data logged
-        /// </summary>
-        bool Save(bool forceInsert);
+        ICrudEntity<TEntity> Save();
     }
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="ConnectionString.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -17,34 +17,32 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
+using System;
+using Genesys.Extensions;
 using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
-    /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+    /// Class attribute decoration that holds the ConnectionStringName 
+    /// Name is the key used to lookup connection string from config file.
+    /// </summary>    
+    [AttributeUsage(AttributeTargets.All)]
+    public class ConnectionString : Attribute, IAttributeValue<string>
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// Name supplied by attribute.
+        /// Default is DefaultConnection
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
+        public string Value { get; set; } = "DefaultConnection";
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="connectionStringValue">Connection string name</param>
+        public ConnectionString(string connectionStringValue)
         {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            Value = connectionStringValue;
         }
     }
 }

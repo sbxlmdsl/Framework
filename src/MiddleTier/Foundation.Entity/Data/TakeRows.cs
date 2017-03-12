@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="TakeRows.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -17,34 +17,31 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
-using Genesys.Foundation.Test.Data;
+using System;
+using Genesys.Extensions;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// Take Top Rows Attribute
+    ///  Default: 100 rows
     /// </summary>
-    [TestClass()]
-    public partial class ActivityLoggerTests
+    [AttributeUsage(AttributeTargets.Class), CLSCompliant(true)]
+    public class TakeRows : Attribute, IAttributeValue<int>
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// Value of attribute
         /// </summary>
-        [TestMethod()]
-        public void Activity_ActivityLogger()
+        public int Value { get; set; } = 100;
+
+        /// <summary>
+        /// Number of rows to take top from query
+        ///  Default: 100 rows
+        /// </summary>
+        /// <param name="value">number of rows to take</param>
+        public TakeRows(int value)
         {
-            Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
-            log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
-            // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
-            log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            Value = value;
         }
     }
 }

@@ -48,20 +48,20 @@
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extensions.Full, Version=3.17.1.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.1\lib\net46\Genesys.Extensions.Full.dll</HintPath>
+    <Reference Include="Genesys.Extensions.Full, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.3-rc1\lib\net46\Genesys.Extensions.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extensions.Universal, Version=3.17.1.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.1\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extensions.Universal, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.3-rc1\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extras.Full, Version=3.17.1.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.1\lib\net46\Genesys.Extras.Full.dll</HintPath>
+    <Reference Include="Genesys.Extras.Full, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.3-rc1\lib\net46\Genesys.Extras.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extras.Universal, Version=3.17.1.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.1\lib\net46\Genesys.Extras.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extras.Universal, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.3-rc1\lib\net46\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -69,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -81,9 +82,10 @@
   <ItemGroup>
     <Compile Include="Activity\ActivityLoggerTests.cs" />
     <Compile Include="Common\MyApplication.cs" />
+    <Compile Include="Common\Test.Data.Tables.cs" />
     <Compile Include="Device\DeviceStorageTests.cs" />
     <Compile Include="Device\DeviceInfoTests.cs" />
-    <Compile Include="Exceptions\ExceptionLoggerTests.cs" />
+    <Compile Include="Activity\ExceptionLoggerTests.cs" />
     <Compile Include="Process\ProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ValidationRuleTests.cs" />
@@ -99,7 +101,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MiddleTier\Foundation.Entity\Genesys.Foundation.Entity.csproj">
       <Project>{18775c40-e495-40f4-8e1a-bd8df03032a7}</Project>

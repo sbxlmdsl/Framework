@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ActivityLoggerTests.cs" company="Genesys Source">
+// <copyright file="ExceptionLoggerTests.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
 //      Licensed to the Apache Software Foundation (ASF) under one or more 
 //      contributor license agreements.  See the NOTICE file distributed with 
@@ -19,32 +19,30 @@
 //-----------------------------------------------------------------------
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
 using Genesys.Foundation.Test.Data;
 
 namespace Genesys.Extensions.Test
 {
     /// <summary>
-    /// Tests code first ActivityLogger object saving activity to the database 
+    /// Tests code first ExceptionLogger functionality
     /// </summary>
     [TestClass()]
-    public partial class ActivityLoggerTests
+    public partial class ExceptionLoggerTests
     {
         /// <summary>
-        /// Tests code first ActivityLogger object saving activity to the database
+        /// Tests code first ExceptionLogger saving to the database
         /// </summary>
         [TestMethod()]
-        public void Activity_ActivityLogger()
+        public void Activity_ExceptionLogger()
         {
             Tables.DropMigrationHistory();
-            ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
+            ExceptionLogger log1 = new ExceptionLogger("DefaultConnection", "Activity");
             log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            Assert.IsTrue(log1.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
             // Your custom schema
-            ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
+            ExceptionLogger log2 = new ExceptionLogger("DefaultConnection", "MySchema");
             log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            Assert.IsTrue(log2.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
         }
     }
 }

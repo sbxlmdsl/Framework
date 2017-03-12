@@ -17,6 +17,7 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
+using Genesys.Foundation.Data;
 using System;
 
 namespace Genesys.Foundation.Entity
@@ -30,6 +31,6 @@ namespace Genesys.Foundation.Entity
         /// <summary>
         /// Status of this record with static values: 0x0 - Default, 0x1 - ReadOnly, 0x2 - Historical, 0x4 - Deleted
         /// </summary>
-        int Status { get; set; }
+        RecordStatusValues Status { get; set; }
     }
 }

@@ -18,7 +18,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Genesys.Extras.Exceptions;
+using Genesys.Foundation.Activity;
 
 namespace Genesys.Extensions.Test
 {
