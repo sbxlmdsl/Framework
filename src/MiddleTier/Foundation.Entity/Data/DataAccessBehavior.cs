@@ -23,21 +23,48 @@ using Genesys.Extensions;
 namespace Genesys.Foundation.Data
 {
     /// <summary>
+    /// enumeration to allow the attribute to use strongly-typed ID
+    /// </summary>
+    [CLSCompliant(true)]
+    public enum DataAccessBehaviors
+    {
+        /// <summary>
+        /// All Select, Insert, Update and Delete functionality
+        /// </summary>
+        AllAccess = 0,
+
+        /// <summary>
+        /// Insert functionality
+        /// </summary>
+        InsertOnly = 1,
+
+        /// <summary>
+        /// Select functionality
+        /// </summary>
+        SelectOnly = 2,
+
+        /// <summary>
+        /// Select, Insert and Delete functionality
+        /// </summary>
+        NoUpdate = 3
+    }
+
+    /// <summary>
     /// Connection string Attribute
     /// </summary>
     [AttributeUsage(AttributeTargets.Class), CLSCompliant(true)]
-    public class DataAccessBehavior : Attribute, IAttributeValue<DataAccessBehaviorValues>
+    public class DataAccessBehavior : Attribute, IAttributeValue<DataAccessBehaviors>
     {
         /// <summary>
         /// Value of attribute
         /// </summary>
-        public DataAccessBehaviorValues Value { get; set; } = DataAccessBehaviorValues.AllAccess;
+        public DataAccessBehaviors Value { get; set; } = DataAccessBehaviors.AllAccess;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="value">Value to hydrate</param>
-        public DataAccessBehavior(DataAccessBehaviorValues value)
+        public DataAccessBehavior(DataAccessBehaviors value)
         {
             Value = value;
         }

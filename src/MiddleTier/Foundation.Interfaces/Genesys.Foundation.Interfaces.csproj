@@ -44,43 +44,51 @@
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GenesysFramework.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Compile Include="Activity\IActivityContext.cs" />
     <Compile Include="Activity\IActivityContextID.cs" />
-    <Compile Include="Data\DataAccessBehaviorValues.cs" />
-    <Compile Include="Data\DataConcurrencyValues.cs" />
-    <Compile Include="Data\RecordStatusValues.cs" />
+    <Compile Include="Data\IReadOnlyDatastore.cs" />
+    <Compile Include="Data\ISaveableDatastore.cs" />
+    <Compile Include="Entity\EntityInfo.cs" />
+    <Compile Include="Entity\EntityState.cs" />
     <Compile Include="Device\IApplicationUUID.cs" />
     <Compile Include="Device\IDeviceUUID.cs" />
     <Compile Include="Entity\ICreatedDate.cs" />
     <Compile Include="Entity\ICode.cs" />
-    <Compile Include="Entity\ISaveableEntity.cs" />
+    <Compile Include="Entity\CodeProperty.cs" />
+    <Compile Include="Operation\ICrudOperation.cs" />
     <Compile Include="Entity\IModifiedDate.cs" />
     <Compile Include="Entity\IEntityKey.cs" />
     <Compile Include="Entity\IKey.cs" />
+    <Compile Include="Operation\IWriteOperation.cs" />
+    <Compile Include="Operation\IReadOperation.cs" />
+    <Compile Include="Operation\IOperation.cs" />
+    <Compile Include="Entity\IDProperty.cs" />
     <Compile Include="Name\INameCode.cs" />
-    <Compile Include="Process\KeyParameter.cs" />
+    <Compile Include="Entity\KeyProperty.cs" />
     <Compile Include="Activity\IExceptionLog.cs" />
     <Compile Include="Name\INameKey.cs" />
     <Compile Include="Name\INameID.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\IID.cs" />
     <Compile Include="Name\IName.cs" />
-    <Compile Include="Entity\ICrudEntity.cs" />
     <Compile Include="Entity\IBytesKey.cs" />
     <Compile Include="Name\INameDescription.cs" />
-    <Compile Include="Entity\IReadOnlyEntity.cs" />
-    <Compile Include="Process\ProcessManager.cs" />
-    <Compile Include="Process\ProcessParameter.cs" />
-    <Compile Include="Process\ProcessResult.cs" />
+    <Compile Include="Worker\WorkerParameter.cs" />
+    <Compile Include="Worker\WorkerResult.cs" />
+    <Compile Include="Worker\WorkerStates.cs" />
+    <Compile Include="Operation\SearchClause.cs" />
     <Compile Include="Security\IIdentityUserName.cs" />
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="Security\UserIdentity.cs" />
     <Compile Include="Security\UserPrincipal.cs" />
     <Compile Include="Text\IText.cs" />
-    <Compile Include="Process\IProcessParameter.cs" />
-    <Compile Include="Process\IProcessResult.cs" />
+    <Compile Include="Worker\IWorkerParameter.cs" />
+    <Compile Include="Worker\IWorkerResult.cs" />
     <Compile Include="Security\IUserPrincipal.cs" />
     <Compile Include="Session\ISessionContext.cs" />
     <Compile Include="Validation\IValidationRule.cs" />
@@ -93,21 +101,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GenesysFramework.snk" />
     <None Include="packages.config" />
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Genesys.Extensions.Universal, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.3-rc1\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extensions.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Genesys.Extras.Universal, Version=3.17.2.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.3-rc1\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+    <Reference Include="Genesys.Extras.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exception\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>

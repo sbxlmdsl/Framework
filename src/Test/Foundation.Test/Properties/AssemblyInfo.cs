@@ -24,11 +24,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Genesys Source Quick-Start Tests")]
-[assembly: AssemblyDescription("Genesys Source Quick-Start foundation classes bring code reusability to your ASP.NET MVC web apps, ASP.NET Web Forms web apps, ASP.NET Web API web services, WPF desktop apps, PCL libraries, and UWP cross-platform mobile apps.")]
+[assembly: AssemblyTitle("Genesys Framework Foundation Tests")]
+[assembly: AssemblyDescription("Genesys Framework Foundation classes bring code reusability to your ASP.NET MVC web apps, ASP.NET Web Forms web apps, ASP.NET Web API web services, WPF desktop apps, PCL libraries, and UWP cross-platform mobile apps.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Genesys Source")]
-[assembly: AssemblyProduct("Genesys Source Quick-Start foundation classes for .Net Core and .Net Full")]
+[assembly: AssemblyProduct("Genesys Framework Foundation classes for .Net Core and .Net Full")]
 [assembly: AssemblyCopyright("Copyright © 2017 Genesys Source. All rights reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

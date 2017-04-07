@@ -31,7 +31,7 @@ namespace Genesys.Foundation.Entity
     /// </summary>
     
     [CLSCompliant(true)]
-    public abstract class ImageEntity<TEntity> : CrudEntity<TEntity>, IBytesKey where TEntity : ImageEntity<TEntity>, new()
+    public abstract class ImageEntity<TEntity> : EntityInfo<TEntity>, IBytesKey where TEntity : ImageEntity<TEntity>, new()
     {
         /// <summary>
         /// 1x1px transparent image

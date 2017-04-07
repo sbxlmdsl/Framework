@@ -40,33 +40,38 @@ namespace Genesys.Foundation.Validation
             /// <summary>
             /// Non destructive warning when validation fails
             /// </summary>
+            public static Guid Success = TypeExtension.DefaultGuid;
+
+            /// <summary>
+            /// Non destructive warning when validation fails
+            /// </summary>
             public static Guid Warning = new Guid("52ED403E-2839-4597-BA8A-6A7C2D8A511B");
 
             /// <summary>
             /// Failed validation allows saving of data, but record is not completed and in Work In Progress status
             /// </summary>
-            public static Guid ErrorWIP = new Guid("A5210E6A-59A1-4F7F-8113-2796F9CE3618");
+            public static Guid InProgress = new Guid("A5210E6A-59A1-4F7F-8113-2796F9CE3618");
 
             /// <summary>
-            /// Failed validation restricts saving of x.
+            /// Fatal error condition
             /// </summary>
-            public static Guid ErrorCantSave = new Guid("4087CB0C-4951-4E1A-BA1D-F6FF6339D47D");
+            public static Guid Error = new Guid("4087CB0C-4951-4E1A-BA1D-F6FF6339D47D");
         }
         
         /// <summary>
         /// Property Name to validate
         /// </summary>
-        public string ValidationPropertyName { get { return base.Item1; } }
+        public string Property { get { return base.Item1; } }
 
         /// <summary>
         /// Expression of the validation query
         /// </summary>
-        public Predicate<TEntity> ValidationQuery { get { return base.Item2; } }
+        public Predicate<TEntity> Criteria { get { return base.Item2; } }
 
         /// <summary>
         /// Type of: Errors, warnings, cant save
         /// </summary>
-        public Guid ValidationRuleTypeID { get; set; } = ValidationRuleTypes.ErrorWIP;
+        public Guid ValidationRuleTypeID { get; set; } = ValidationRuleTypes.InProgress;
         
         /// <summary>
         /// Is Valid
@@ -81,7 +86,7 @@ namespace Genesys.Foundation.Validation
         /// <summary>
         /// CanSave
         /// </summary>
-        public bool CanSave { get { return (this.ValidationRuleTypeID != ValidationRuleTypes.ErrorCantSave && this.IsValid == true); } }
+        public bool CanSave { get { return (this.ValidationRuleTypeID != ValidationRuleTypes.Error && this.IsValid == true); } }
         
         /// <summary>
         /// Constructor
@@ -99,7 +104,7 @@ namespace Genesys.Foundation.Validation
         
         public bool Validate(TEntity entityToValidate)
         {
-            IsValid = this.ValidationQuery(entityToValidate);
+            IsValid = this.Criteria(entityToValidate);
             HasValidated = true;
             return IsValid;
         }

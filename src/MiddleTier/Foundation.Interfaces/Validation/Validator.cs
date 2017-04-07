@@ -103,7 +103,7 @@ namespace Genesys.Foundation.Validation
             bool returnValue = TypeExtension.DefaultBoolean;
             //Force validation if has not been ran
             if (HasValidated() == false) { ValidateAll(entity); }
-            if (FailedRules.Where(x => x.ValidationRuleTypeID == ValidationRule<TEntity>.ValidationRuleTypes.ErrorCantSave).Select(y => y).Count() == 0)
+            if (FailedRules.Where(x => x.ValidationRuleTypeID == ValidationRule<TEntity>.ValidationRuleTypes.Error).Select(y => y).Count() == 0)
             {
                 returnValue = true;
             }

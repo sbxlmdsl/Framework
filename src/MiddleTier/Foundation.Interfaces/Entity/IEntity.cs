@@ -17,7 +17,7 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Genesys.Foundation.Data;
+using Genesys.Extras.Serialization;
 using System;
 
 namespace Genesys.Foundation.Entity
@@ -26,11 +26,21 @@ namespace Genesys.Foundation.Entity
     /// Base used for all entity classes
     /// </summary>    
     [CLSCompliant(true)]
-    public interface IEntity : IID, IKey, ICreatedDate, IModifiedDate
+    public interface IEntity : IID, IKey, ICreatedDate, IModifiedDate, ISerialize<IEntity>
     {
+        /// <summary>
+        /// Is a new object, and most likely not yet committed to the database
+        /// </summary>
+        bool IsNew { get; }
+
+        /// <summary>
+        /// ActivityFlowID
+        /// </summary>
+        int ActivityContextID { get; set; }
+
         /// <summary>
         /// Status of this record with static values: 0x0 - Default, 0x1 - ReadOnly, 0x2 - Historical, 0x4 - Deleted
         /// </summary>
-        RecordStatusValues Status { get; set; }
+        EntityStates Status { get; set; }
     }
 }

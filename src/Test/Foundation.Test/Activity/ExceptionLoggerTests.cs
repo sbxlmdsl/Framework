@@ -20,8 +20,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Genesys.Foundation.Activity;
 using Genesys.Foundation.Test.Data;
+using System.Linq;
+using Genesys.Extensions;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Test
 {
     /// <summary>
     /// Tests code first ExceptionLogger functionality
@@ -35,14 +37,25 @@ namespace Genesys.Extensions.Test
         [TestMethod()]
         public void Activity_ExceptionLogger()
         {
+            var preSaveCount = TypeExtension.DefaultInteger;
+            var postSaveCount = TypeExtension.DefaultInteger;
+
             Tables.DropMigrationHistory();
+
             ExceptionLogger log1 = new ExceptionLogger("DefaultConnection", "Activity");
+            preSaveCount = ExceptionLogger.GetAll("DefaultConnection", "Activity").Count();
             log1.Save();
+            postSaveCount = ExceptionLogger.GetAll("DefaultConnection", "Activity").Count();
             Assert.IsTrue(log1.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
+            Assert.IsTrue(postSaveCount == preSaveCount + 1);
+
             // Your custom schema
             ExceptionLogger log2 = new ExceptionLogger("DefaultConnection", "MySchema");
+            preSaveCount = ExceptionLogger.GetAll("DefaultConnection", "Activity").Count();
             log2.Save();
+            postSaveCount = ExceptionLogger.GetAll("DefaultConnection", "Activity").Count();
             Assert.IsTrue(log2.ExceptionLogID != TypeExtension.DefaultInteger, "ActivityLogger threw exception.");
+            Assert.IsTrue(postSaveCount == preSaveCount + 1);
         }
     }
 }

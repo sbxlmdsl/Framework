@@ -33,7 +33,7 @@ namespace Genesys.Foundation.Test.Data
         /// </summary>
         /// <param name="database"></param>
         /// <param name="schema"></param>
-        public static void DropMigrationHistory(string database = "[FrameworkData]", string schema = "[Activity]")
+        public static void DropMigrationHistory(string database = "[FoundationData]", string schema = "[Activity]")
         {
             // Must remove __MigrationHistory for EF Code First objects to auto-create their tables
             var configuration = new ConfigurationManagerFull();

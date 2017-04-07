@@ -24,6 +24,7 @@ using System.Linq;
 using System.Reflection;
 using Genesys.Extensions;
 using Genesys.Extras.Configuration;
+using Genesys.Foundation.Data;
 
 namespace Genesys.Foundation.Activity
 {
@@ -37,16 +38,16 @@ namespace Genesys.Foundation.Activity
     public class ActivityLogger : ActivityContext
     {
         /// <summary>
-        /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
-        /// Default is DefaultConnection
+        /// Name/key of connection string
+        /// Defailt: DefaultConnection
         /// </summary>
-        protected virtual string ConnectionStringName { get; set; } = "DefaultConnection";
+        private string  ConnectionString { get; set; } = ConnectionStringName.DefaultValue;
 
         /// <summary>
-        /// Database schema name
-        /// Default is dbo
+        /// Database schema name for Activity records.
+        /// Default: Activity
         /// </summary>
-        protected virtual string DatabaseSchemaName { get; set; } = "Activity";
+        private string DatabaseSchema { get; set; } = DatabaseSchemaName.DefaultActivityValue;
 
         /// <summary>
         /// This protected constructor should not be called. Factory methods should be used instead.
@@ -60,33 +61,66 @@ namespace Genesys.Foundation.Activity
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="connectStringName">Key/Name of the connection string in the .config file or database</param>
+        /// <param name="connectStringName">Key of the config value for this actions connection string</param>
+        /// <param name="databaseSchema">Database Schema that owns the Activity table</param>
         /// <remarks></remarks>
-        public ActivityLogger(string connectStringName) : this()
+        public ActivityLogger(string connectStringName, string databaseSchema) : this()
         {
-            ConnectionStringName = connectStringName;
+            ConnectionString = connectStringName;
+            DatabaseSchema = databaseSchema;
         }
 
         /// <summary>
-        /// Constructor
+        /// Fills and saves an activity
         /// </summary>
-        /// <param name="connectStringName"></param>
-        /// <param name="databaseSchemaName"></param> 
+        /// <param name="connectStringName">Key of the config value for this actions connection string</param>
+        /// <param name="databaseSchema">Database Schema that owns the Activity table</param>
         /// <remarks></remarks>
-        public ActivityLogger(string connectStringName, string databaseSchemaName) : this(connectStringName)
-        {
-            DatabaseSchemaName = databaseSchemaName;
-        }
-
-        /// <summary>
-        /// Hydrates object and saves the record 
-        /// </summary>
         public static int Create(string connectStringName, string databaseSchema)
         {
-            var log = new ActivityLogger();
-            log.ConnectionStringName = connectStringName;
-            log.DatabaseSchemaName = databaseSchema;
+            ActivityLogger log = new ActivityLogger(connectStringName, databaseSchema) { };
             return log.Save();
+        }
+
+        /// <summary>
+        /// Loads an existing object MyBased on ID.
+        /// </summary>
+        public static IQueryable<ActivityContext> GetAll()
+        {
+            var logger = new ActivityLogger();
+            return ActivityLogger.GetAll(logger.ConnectionString, logger.DatabaseSchema);
+        }
+
+        /// <summary>
+        /// Loads an existing object MyBased on ID.
+        /// </summary>
+        /// <param name="connectStringName">Key of the config value for this actions connection string</param>
+        /// <param name="databaseSchema">Database Schema that owns the Activity table</param>
+        public static IQueryable<ActivityContext> GetAll(string connectStringName, string databaseSchema)
+        {
+            var returnValue = default(IQueryable<ActivityContext>);
+            var dbContext = new DatabaseContext(connectStringName, databaseSchema);
+
+            try
+            {
+                    returnValue = dbContext.EntityData;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.Create(ex, typeof(ActivityContext), String.Format("ActivityLogger.GetByID({0})"));
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Loads an existing object MyBased on ID.
+        /// </summary>
+        /// <param name="id">The unique ID of the object</param>
+        public static ActivityContext GetByID(int id)
+        {
+            var logger = new ActivityLogger();
+            return ActivityLogger.GetByID(id, logger.ConnectionString, logger.DatabaseSchema);
         }
 
         /// <summary>
@@ -109,7 +143,7 @@ namespace Genesys.Foundation.Activity
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(ActivityContext), String.Format("ActivityLogger.GetByID({0})", id.ToString()), connectStringName, databaseSchema);
+                ExceptionLogger.Create(ex, typeof(ActivityContext), String.Format("ActivityLogger.GetByID({0})", id.ToString()));
             }
 
             return returnValue;
@@ -120,7 +154,7 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         public virtual int Save()
         {
-            var dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName);
+            var dbContext = new DatabaseContext(ConnectionStringName.DefaultValue, DatabaseSchemaName.DefaultActivityValue);
 
             try
             {

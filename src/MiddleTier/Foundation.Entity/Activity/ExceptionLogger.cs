@@ -24,6 +24,7 @@ using System.Linq;
 using System.Reflection;
 using Genesys.Extensions;
 using Genesys.Extras.Configuration;
+using Genesys.Foundation.Data;
 
 namespace Genesys.Foundation.Activity
 {
@@ -36,20 +37,10 @@ namespace Genesys.Foundation.Activity
     [CLSCompliant(true)]    
     public class ExceptionLogger : ExceptionLog
     {
+        private string connectStringName = ConnectionStringName.DefaultValue;
+        private string databaseSchemaName = DatabaseSchemaName.DefaultActivityValue;
         private Uri endpointUrl = new Uri(TypeExtension.DefaultUri);
         private Exception currentException = new System.Exception("No Exception");
-
-        /// <summary>
-        /// Connection string key name, from Web.config or App_Data\ConnectionStrings.config
-        /// Default is DefaultConnection
-        /// </summary>
-        protected string ConnectionStringName { get; set; } = "DefaultConnection";
-
-        /// <summary>
-        /// Database schema name
-        /// Default is dbo
-        /// </summary>
-        protected string DatabaseSchemaName { get; set; } = "Activity";
 
         /// <summary>
         /// The Activity record that was processing when this exception occurred
@@ -99,19 +90,19 @@ namespace Genesys.Foundation.Activity
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="connectStringName"></param>
+        /// <param name="connectionStringName"></param>
         /// <remarks></remarks>
-        public ExceptionLogger(string connectStringName) : this()
+        public ExceptionLogger(string connectionStringName) : this()
         {
-            ConnectionStringName = connectStringName;
+            connectStringName = connectionStringName;
         }
 
         /// <summary>
         /// Creates Exception object
         /// </summary>
-        /// <param name="connectStringName"></param>
+        /// <param name="connectionStringName"></param>
         /// <param name="databaseSchema"></param>
-        public ExceptionLogger(string connectStringName, string databaseSchema) : this(connectStringName) { DatabaseSchemaName = databaseSchema; }
+        public ExceptionLogger(string connectionStringName, string databaseSchema) : this(connectionStringName) { databaseSchemaName = databaseSchema; }
 
         /// <summary>
         /// Constructor
@@ -121,18 +112,40 @@ namespace Genesys.Foundation.Activity
         /// <param name="customMessage"></param>
         public ExceptionLogger(Exception exception, Type concreteType, string customMessage) : base(exception, concreteType, customMessage) { }
 
+
         /// <summary>
         /// Hydrates object and saves the log record
         /// </summary>
         /// <param name="exception">System.Exception object to log</param>
         /// <param name="concreteType">Type that is logging the exception</param>
         /// <param name="customMessage">Custom message to append to the exception log</param>
-        /// <param name="connectStringName">Key name of connection string in config</param>
-        /// <param name="databaseSchema">Database schema name</param>
-        public static void Create(Exception exception, Type concreteType, string customMessage, string connectStringName, string databaseSchema)
+        /// <returns>ID if successfull, -1 if not.</returns>
+        public static int Create(Exception exception, Type concreteType, string customMessage)
         {
-            ExceptionLogger log = new ExceptionLogger(exception, concreteType, customMessage) { ConnectionStringName = connectStringName, DatabaseSchemaName = databaseSchema };
-            log.Save();
+            ExceptionLogger log = new ExceptionLogger(exception, concreteType, customMessage) { };
+            return log.Save();
+        }
+
+        /// <summary>
+        /// Loads an existing object MyBased on ID.
+        /// </summary>
+        /// <param name="connectStringName">Key of the config value for this actions connection string</param>
+        /// <param name="databaseSchema">Database Schema that owns the Activity table</param>
+        public static IQueryable<ExceptionLog> GetAll(string connectStringName, string databaseSchema)
+        {
+            var returnValue = default(IQueryable<ExceptionLog>);
+            var dbContext = new DatabaseContext(connectStringName, databaseSchema);
+
+            try
+            {
+                returnValue = dbContext.EntityData;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.Create(ex, typeof(ExceptionLog), String.Format("ActivityLogger.GetByID({0})"));
+            }
+
+            return returnValue;
         }
 
         /// <summary>
@@ -155,7 +168,7 @@ namespace Genesys.Foundation.Activity
             }
             catch(Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(ExceptionLog), String.Format("ExceptionLogger.GetByID({0})", id.ToString()), connectStringName, databaseSchema);
+                ExceptionLogger.Create(ex, typeof(ExceptionLog), String.Format("ExceptionLogger.GetByID({0})", id.ToString()));
             }
 
             return returnValue;
@@ -166,7 +179,7 @@ namespace Genesys.Foundation.Activity
         /// </summary>
         public virtual int Save()
         {
-            using (DatabaseContext dbContext = new DatabaseContext(this.ConnectionStringName, this.DatabaseSchemaName))
+            using (DatabaseContext dbContext = new DatabaseContext(connectStringName, databaseSchemaName))
             {
                 try
                 {

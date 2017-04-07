@@ -19,11 +19,11 @@
 //-----------------------------------------------------------------------
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Genesys.Foundation.Activity;
-using System.Data.SqlClient;
-using Genesys.Extras.Configuration;
 using Genesys.Foundation.Test.Data;
+using System.Linq;
+using Genesys.Extensions;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Test
 {
     /// <summary>
     /// Tests code first ActivityLogger object saving activity to the database 
@@ -37,14 +37,24 @@ namespace Genesys.Extensions.Test
         [TestMethod()]
         public void Activity_ActivityLogger()
         {
+            var preSaveCount = TypeExtension.DefaultInteger;
+            var postSaveCount = TypeExtension.DefaultInteger;
+
             Tables.DropMigrationHistory();
+            preSaveCount = ActivityLogger.GetAll("DefaultConnection", "Activity").Count();
             ActivityLogger log1 = new ActivityLogger("DefaultConnection", "Activity");
             log1.Save();
-            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            postSaveCount = ActivityLogger.GetAll("DefaultConnection", "Activity").Count();
+            Assert.IsTrue(log1.ActivityContextID != TypeExtension.DefaultInteger);
+            Assert.IsTrue(postSaveCount == preSaveCount + 1);
+
             // Your custom schema
             ActivityLogger log2 = new ActivityLogger("DefaultConnection", "MySchema");
+            preSaveCount = ActivityLogger.GetAll("DefaultConnection", "Activity").Count();
             log2.Save();
-            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger, "ActivityLogger threw Activity.");
+            postSaveCount = ActivityLogger.GetAll("DefaultConnection", "Activity").Count();
+            Assert.IsTrue(log2.ActivityContextID != TypeExtension.DefaultInteger);
+            Assert.IsTrue(postSaveCount == preSaveCount + 1);
         }
     }
 }

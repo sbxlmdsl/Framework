@@ -20,7 +20,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Genesys.Foundation.Activity;
 
-namespace Genesys.Extensions.Test
+namespace Genesys.Foundation.Test
 {
     /// <summary>
     /// Tests code first ExceptionLogger functionality

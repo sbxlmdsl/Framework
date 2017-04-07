@@ -17,13 +17,11 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
-using System.ComponentModel;
-using System.Reflection;
 using Genesys.Extensions;
-using Genesys.Extras.Serialization;
-using System.Runtime.CompilerServices;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Genesys.Foundation.Entity
 {
@@ -32,19 +30,20 @@ namespace Genesys.Foundation.Entity
 	/// </summary>
 	/// <remarks>ModelBase</remarks>
 	[CLSCompliant(true)]
-	public abstract class ModelEntity<TModel> : IID, IKey, INotifyPropertyChanged where TModel : ModelEntity<TModel>, new()
+	public abstract class ModelEntity<TModel> : EntityInfo<TModel>, INotifyPropertyChanged where TModel : ModelEntity<TModel>, new()
 	{
         private int idField = TypeExtension.DefaultInteger;
         private Guid keyField = TypeExtension.DefaultGuid;
+
         /// <summary>
         /// Primary key of this record. Internal use only, use Key when exposing data externally.
         /// </summary>
-        public virtual int ID { get { return idField; } set { SetField(ref idField, value); } }
+        public override int ID { get { return idField; } set { SetField(ref idField, value); } }
 
         /// <summary>
         /// Primary key of this record. To be used for external use.
         /// </summary>
-        public virtual Guid Key { get { return keyField; } set { SetField(ref keyField, value); } }
+        public override Guid Key { get { return keyField; } set { SetField(ref keyField, value); } }
 
         /// <summary>
         /// Constructor
@@ -84,65 +83,6 @@ namespace Genesys.Foundation.Entity
                 returnValue = true;
             }                
             return returnValue;
-        }
-
-        /// <summary>
-        /// Fills this object with another object's data (of the same type)
-        /// </summary>
-        /// <param name="newItem"></param>
-        /// <remarks></remarks>
-        public bool Equals(TModel newItem)
-		{
-			bool returnValue = TypeExtension.DefaultBoolean;
-			Type newObjectType = newItem.GetType();
-
-			// Start True
-			returnValue = true;
-			// Loop through all new item's properties
-			foreach (var newObjectProperty in newObjectType.GetRuntimeProperties()) {
-				// Copy the data using reflection
-				PropertyInfo currentProperty = typeof(TModel).GetRuntimeProperty(newObjectProperty.Name);
-				if (currentProperty.CanWrite == true) {
-					// Check for equivalence
-					if (object.Equals(currentProperty.GetValue(this, null), newObjectProperty.GetValue(newItem, null)) == false) {
-						returnValue = false;
-						break;
-					}
-				}
-			}
-
-			// Return data
-			return returnValue;
-		}
-		
-		/// <summary>
-		/// Start with ID as string representation
-		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
-		public override string ToString()
-		{
-			return ID.ToString();
-		}
-        
-        /// <summary>
-        /// Serializes this object into a Json string
-        /// </summary>
-        /// <returns></returns>
-        public string Serialize()
-        {
-            JsonSerializer<TModel> serializer = new JsonSerializer<TModel>();
-            return serializer.Serialize(this);
-        }
-
-        /// <summary>
-        /// De-serializes a string into this object
-        /// </summary>
-        /// <returns></returns>
-        public static TModel Deserialize(string jsonString)
-        {
-            JsonSerializer<TModel> serializer = new JsonSerializer<TModel>();
-            return serializer.Deserialize(jsonString);
         }
     }
 }
