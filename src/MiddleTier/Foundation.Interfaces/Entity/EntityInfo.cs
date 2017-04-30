@@ -33,11 +33,6 @@ namespace Genesys.Foundation.Entity
     public abstract class EntityInfo<TEntity> : Validator<TEntity>, IEntity where TEntity : class, IEntity, new()
     {
         /// <summary>
-        /// Serialize and Deserialize this class
-        /// </summary>
-        private JsonSerializer<EntityInfo<TEntity>> Serializer = new JsonSerializer<EntityInfo<TEntity>>();
-
-        /// <summary>
         /// ID of record
         /// </summary>
         public virtual int ID { get; set; } = TypeExtension.DefaultInteger;
@@ -74,10 +69,15 @@ namespace Genesys.Foundation.Entity
         {
             get
             {
-                return (this.ID == TypeExtension.DefaultInteger ? true : false);
+                return (this.ID == TypeExtension.DefaultInteger && this.Key == TypeExtension.DefaultGuid ? true : false);
             }
-        }       
-        
+        }
+
+        /// <summary>
+        /// Serialize and Deserialize this class
+        /// </summary>
+        private JsonSerializer<EntityInfo<TEntity>> serializer = new JsonSerializer<EntityInfo<TEntity>>();
+
         /// <summary>
         /// Forces initialization of EF-generated properties (PropertyValue = TypeExtension.Default{Type})
         /// </summary>
@@ -140,7 +140,7 @@ namespace Genesys.Foundation.Entity
         /// <returns></returns>
         public string Serialize()
         {
-            return Serializer.Serialize(this);
+            return serializer.Serialize(this);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Genesys.Foundation.Entity
         /// <returns></returns>
         public IEntity Deserialize(string data)
         {
-            return Serializer.Deserialize(data);
+            return serializer.Deserialize(data);
         }
     }
 }

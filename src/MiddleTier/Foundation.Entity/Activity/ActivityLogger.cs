@@ -217,7 +217,7 @@ namespace Genesys.Foundation.Activity
             /// </summary>
             /// <remarks></remarks>
             public DatabaseContext(string connectStringName, string databaseSchema)
-                : base(ConfigurationManagerFull.ConnectionStrings.GetValue(connectStringName))
+                : base(new ConfigurationManagerFull().ConnectionStrings.GetValue(connectStringName))
             {
                 databaseSchemaField = databaseSchema;
             }

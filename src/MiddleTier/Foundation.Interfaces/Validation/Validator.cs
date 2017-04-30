@@ -17,10 +17,10 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
+using Genesys.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Genesys.Extensions;
 
 namespace Genesys.Foundation.Validation
 {
@@ -53,8 +53,7 @@ namespace Genesys.Foundation.Validation
         
         /// <summary>
         /// Runs all business rules
-        /// </summary>
-        
+        /// </summary>        
         public List<ValidationRule<TEntity>> ValidateAll(TEntity entity)
         {
             foreach (var Item in this.BusinessRules)

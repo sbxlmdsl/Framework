@@ -43,19 +43,9 @@ namespace Genesys.Foundation.Entity
         /// </summary>
         public CrudEntity() : base()
         {
-            this.Initialize<CrudEntity<TEntity>>();
 #if (DEBUG)
             ThrowException = true;
 #endif
-        }
-
-        /// <summary>
-        /// Constructor with initialization
-        /// </summary>
-        protected CrudEntity(int newID)
-            : this()
-        {
-            this.ID = newID;
         }
 
         /// <summary>

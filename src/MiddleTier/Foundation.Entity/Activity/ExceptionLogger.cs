@@ -39,7 +39,7 @@ namespace Genesys.Foundation.Activity
     {
         private string connectStringName = ConnectionStringName.DefaultValue;
         private string databaseSchemaName = DatabaseSchemaName.DefaultActivityValue;
-        private Uri endpointUrl = new Uri(TypeExtension.DefaultUri);
+        private Uri endpointUrl = TypeExtension.DefaultUri;
         private Exception currentException = new System.Exception("No Exception");
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace Genesys.Foundation.Activity
             /// </summary>
             /// <remarks></remarks>
             public DatabaseContext(string connectStringName, string databaseSchema)
-                : base(ConfigurationManagerFull.ConnectionStrings.GetValue(connectStringName))
+                : base(new ConfigurationManagerFull().ConnectionStrings.GetValue(connectStringName))
             {
                 databaseSchemaField = databaseSchema;
             }

@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Genesys Framework Foundation Interfaces")]
+[assembly: AssemblyTitle("Genesys Framework Foundation Interfaces and Iteroperability")]
 [assembly: AssemblyDescription("Genesys Framework Foundation classes bring code reusability to your ASP.NET MVC web apps, ASP.NET Web Forms web apps, ASP.NET Web API web services, WPF desktop apps, PCL libraries, and UWP cross-platform mobile apps.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Genesys Source")]

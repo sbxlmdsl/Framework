@@ -18,7 +18,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using Genesys.Foundation.Activity;
-using Genesys.Foundation.Data;
 using Genesys.Foundation.Entity;
 using System;
 
@@ -30,8 +29,14 @@ namespace Genesys.Foundation.Operation
     /// Use this interface to support all standard reading and writing methods
     /// </summary>
     [CLSCompliant(true)]
-    public interface IWriteOperation<TEntity> : IReadOperation<TEntity>, ISaveableDatastore<TEntity> where TEntity : IEntity
+    public interface IWriteOperation<TEntity> : IReadOperation<TEntity> where TEntity : IEntity
     {
+        /// <summary>
+        /// Saves the entity to the datastore
+        /// </summary>
+        /// <returns>Returns TEntity exactly as the data has been stored</returns>
+        TEntity Save(TEntity entity, bool forceInsert);
+
         /// <summary>
         /// Inserts or Updates this object in the database
         /// </summary>
@@ -44,5 +49,11 @@ namespace Genesys.Foundation.Operation
         /// <param name="entity">Entity to be committed to the datastore</param>        
         /// <param name="activity">Activity record owning this process</param>        
         TEntity Save(TEntity entity, IActivityContext activity);
+
+        /// <summary>
+        /// Deletes the item from the datastore, using one or more identifiers in TEntity
+        /// </summary>
+        /// <returns></returns>
+        bool Delete(TEntity entity);
     }
 }

@@ -1,29 +1,22 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="CrudEntityTests.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
-//      Licensed to the Apache Software Foundation (ASF) under one or more 
-//      contributor license agreements.  See the NOTICE file distributed with 
-//      this work for additional information regarding copyright ownership.
-//      The ASF licenses this file to You under the Apache License, Version 2.0 
-//      (the 'License'); you may not use this file except in compliance with 
-//      the License.  You may obtain a copy of the License at 
-//       
-//        http://www.apache.org/licenses/LICENSE-2.0 
-//       
-//       Unless required by applicable law or agreed to in writing, software  
-//       distributed under the License is distributed on an 'AS IS' BASIS, 
-//       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
-//       See the License for the specific language governing permissions and  
-//       limitations under the License. 
+//      All rights are reserved. Reproduction or transmission in whole or in part, in
+//      any form or by any means, electronic, mechanical or otherwise, is prohibited
+//      without the prior written consent of the copyright owner.
 // </copyright>
 //-----------------------------------------------------------------------
 using Genesys.Extensions;
+using Genesys.Extras.Configuration;
 using Genesys.Extras.Mathematics;
+using Genesys.Extras.Net;
+using Genesys.Foundation.Data;
 using Genesys.Foundation.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Genesys.Foundation.Test
 {
@@ -154,16 +147,25 @@ namespace Genesys.Foundation.Test
             Assert.IsTrue(dbCustomer.Key == TypeExtension.DefaultGuid);
         }
 
+        public async Task Entity_CustomerSearch_WebService()
+        {
+            var url = new ConfigurationManagerFull().AppSettingValue("MyWebService");
+            var request = new HttpRequestGet<CustomerSearchModel>(url + "/CustomerSearch/-1?firstName=i&lastName=");
+            var returnValue = await request.SendAsync();
+            Assert.IsTrue(request.Response.IsSuccessStatusCode, request.Response.ReasonPhrase);
+            Assert.IsTrue(returnValue.Results.Count > 0);
+        }
+
         /// <summary>
         /// Cleanup all data
         /// </summary>
         [ClassCleanupAttribute()]
         private void Cleanup()
         {
-            var reader = new EntityReader<CustomerInfo>();
+            var db = SaveableDatabase<CustomerInfo>.Construct();
             foreach (int item in recycleBin)
             {
-                reader.GetByID(item).Delete();
+                db.GetByID(item).Delete();
             }
         }
     }

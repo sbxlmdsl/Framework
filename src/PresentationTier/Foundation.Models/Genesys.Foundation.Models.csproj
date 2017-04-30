@@ -28,6 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Genesys.Foundation.Models.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,20 +42,18 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GenesysFramework.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="GenesysFramework.snk" />
     <None Include="packages.config" />
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity\ExceptionModel.cs" />
     <Compile Include="Activity\ActivityModel.cs" />
+    <Compile Include="Application\ViewModel.cs" />
+    <Compile Include="Application\CrudViewModel.cs" />
     <Compile Include="Entity\ImageModel.cs" />
     <Compile Include="Entity\BytesKeyModel.cs" />
     <Compile Include="Entity\ModelEntity.cs" />
@@ -70,11 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Genesys.Extensions.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -29,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Genesys.Foundation.Interfaces.xml</DocumentationFile>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,17 +43,18 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GenesysFramework.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Compile Include="Activity\IActivityContext.cs" />
     <Compile Include="Activity\IActivityContextID.cs" />
-    <Compile Include="Data\IReadOnlyDatastore.cs" />
-    <Compile Include="Data\ISaveableDatastore.cs" />
+    <Compile Include="Application\IApplication.cs" />
+    <Compile Include="Application\IFrame.cs" />
+    <Compile Include="Application\INavigateUri.cs" />
+    <Compile Include="Application\INavigateType.cs" />
+    <Compile Include="Application\IPage.cs" />
+    <Compile Include="Application\IViewModel.cs" />
     <Compile Include="Entity\EntityInfo.cs" />
     <Compile Include="Entity\EntityState.cs" />
     <Compile Include="Device\IApplicationUUID.cs" />
@@ -60,13 +62,15 @@
     <Compile Include="Entity\ICreatedDate.cs" />
     <Compile Include="Entity\ICode.cs" />
     <Compile Include="Entity\CodeProperty.cs" />
+    <Compile Include="Operation\ICrudAsync.cs" />
     <Compile Include="Operation\ICrudOperation.cs" />
     <Compile Include="Entity\IModifiedDate.cs" />
     <Compile Include="Entity\IEntityKey.cs" />
     <Compile Include="Entity\IKey.cs" />
-    <Compile Include="Operation\IWriteOperation.cs" />
-    <Compile Include="Operation\IReadOperation.cs" />
-    <Compile Include="Operation\IOperation.cs" />
+    <Compile Include="Operation\IGetOperation.cs" />
+    <Compile Include="Operation\ISaveAsync.cs" />
+    <Compile Include="Operation\ISaveOperation.cs" />
+    <Compile Include="Operation\IGetAsync.cs" />
     <Compile Include="Entity\IDProperty.cs" />
     <Compile Include="Name\INameCode.cs" />
     <Compile Include="Entity\KeyProperty.cs" />
@@ -81,7 +85,6 @@
     <Compile Include="Worker\WorkerParameter.cs" />
     <Compile Include="Worker\WorkerResult.cs" />
     <Compile Include="Worker\WorkerStates.cs" />
-    <Compile Include="Operation\SearchClause.cs" />
     <Compile Include="Security\IIdentityUserName.cs" />
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="Security\UserIdentity.cs" />
@@ -101,17 +104,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GenesysFramework.snk" />
     <None Include="packages.config" />
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Genesys.Extensions.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.2\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

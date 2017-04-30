@@ -27,6 +27,7 @@ namespace Genesys.Foundation.Operation
     /// <summary>
     /// CRUD operations
     /// Create, Read, Update, Delete.
+    ///  Purpose is to encapsulate IQueryOperation and ISaveAsync for syncronous datastore access
     /// </summary>
     /// <typeparam name="TEntity">Type of class supporting CRUD methods</typeparam>
     [CLSCompliant(true)]

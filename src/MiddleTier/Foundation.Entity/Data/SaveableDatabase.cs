@@ -20,6 +20,7 @@
 using Genesys.Extensions;
 using Genesys.Foundation.Activity;
 using Genesys.Foundation.Entity;
+using Genesys.Foundation.Operation;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -27,9 +28,9 @@ using System.Linq;
 namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// DB Context - Entity Framework uses this to connect to the database
+    /// EF DbContext for read-only GetBy* operations
     /// </summary>
-    public class SaveableDatabase<TEntity> : ReadOnlyDatabase<TEntity>, ISaveableDatastore<TEntity> where TEntity : EntityInfo<TEntity>, new()
+    public class SaveableDatabase<TEntity> : ReadOnlyDatabase<TEntity>, ISaveOperation<TEntity> where TEntity : EntityInfo<TEntity>, new()
     {
         /// <summary>
         /// Defines if object can select, insert, update and/or delete.
@@ -103,7 +104,6 @@ namespace Genesys.Foundation.Data
         public virtual TEntity Save(TEntity entity, bool forceInsert)
         {
             var returnValue = new TEntity();
-            var reader = new EntityReader<TEntity>();
             var connectionName = this.GetAttributeValue<ConnectionStringName>(ConnectionStringName.DefaultValue);
             var activitySchema = this.GetAttributeValue<DatabaseSchemaName>(DatabaseSchemaName.DefaultValue);
             var activity = new ActivityContext();
@@ -139,7 +139,7 @@ namespace Genesys.Foundation.Data
                     {
                         this.SaveChanges();
                     }                    
-                    returnValue = reader.GetByID(entity.ID); // Re-pull clean object, exactly as the DB has stored
+                    returnValue = GetByID(entity.ID); // Re-pull clean object, exactly as the DB has stored
                     entity.Key = returnValue.Key; // ID auto updates object from SP, Key is not updated. Sync Key between return object and passed object.
                 }
             }

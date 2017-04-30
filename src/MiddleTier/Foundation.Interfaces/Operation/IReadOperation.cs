@@ -17,7 +17,6 @@
 //       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
-using Genesys.Foundation.Data;
 using Genesys.Foundation.Entity;
 using System;
 using System.Linq;
@@ -29,8 +28,34 @@ namespace Genesys.Foundation.Operation
     /// Data access entity that can only read
     /// </summary>
     [CLSCompliant(true)]
-    public interface IReadOperation<TEntity> : IReadOnlyDatastore<TEntity> where TEntity : IEntity
+    public interface IReadOperation<TEntity> where TEntity : IEntity
     {
+        /// <summary>
+        /// Gets one or more items from the datastore
+        ///  Usually implemented with a built-in Take/Top cap to avoid accidental huge selects
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<TEntity> GetAll();
+
+        /// <summary>
+        /// All data in this datastore subset, except records with default ID/Key
+        ///  Criteria: Where ID != TypeExtension.DefaultInteger And Also Key != TypeExtension.DefaultGuid
+        ///  Goal: To exclude "Not Selected" records from lookup tables
+        /// </summary>
+        IQueryable<TEntity> GetAllExcludeDefault();
+
+        /// <summary>
+        /// Gets one or no items based on exact ID match
+        /// </summary>
+        /// <returns>One or no TEntity based on exact ID match</returns>
+        TEntity GetByID(int id);
+
+        /// <summary>
+        /// Gets one or no items based on exact Key match
+        /// </summary>
+        /// <returns>One or no TEntity based on exact Key match</returns>
+        TEntity GetByKey(Guid key);
+
         /// <summary>
         /// Get entities list by where clause
         /// </summary>

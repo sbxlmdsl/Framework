@@ -21,16 +21,19 @@ using Genesys.Extensions;
 using Genesys.Extras.Configuration;
 using Genesys.Foundation.Activity;
 using Genesys.Foundation.Entity;
+using Genesys.Foundation.Operation;
 using System;
 using System.Data.Entity;
+using System.Data.Linq;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Genesys.Foundation.Data
 {
     /// <summary>
-    /// DB Context - Entity Framework uses this to connect to the database
+    /// EF DbContext for read-only GetBy* operations
     /// </summary>
-    public class ReadOnlyDatabase<TEntity> : DbContext, IReadOnlyDatastore<TEntity> where TEntity : EntityInfo<TEntity>, new()
+    public class ReadOnlyDatabase<TEntity> : DbContext, IGetOperation<TEntity> where TEntity : EntityInfo<TEntity>, new()
     {
         /// <summary>
         /// Connection string as read from the config file, or passed as a constructor parameter
@@ -103,7 +106,7 @@ namespace Genesys.Foundation.Data
         protected ReadOnlyDatabase()
             : base()
         {
-            
+
 #if (DEBUG)
             ThrowException = true;
 #endif            
@@ -117,12 +120,12 @@ namespace Genesys.Foundation.Data
             : base(connectionString)
         {
             this.ConnectionString = connectionString;
-            
+
 #if (DEBUG)
             ThrowException = true;
 #endif
         }
-
+        
         /// <summary>
         /// All data in this datastore subset
         ///  Can add clauses, such as GetAll().Take(1), GetAll().Where(), etc.
@@ -154,11 +157,11 @@ namespace Genesys.Foundation.Data
 
             try
             {
-                returnValue = Data.Where(x => x.ID != TypeExtension.DefaultInteger && x.Key != TypeExtension.DefaultGuid);                    
+                returnValue = Data.Where(x => x.ID != TypeExtension.DefaultInteger && x.Key != TypeExtension.DefaultGuid);
             }
             catch (Exception ex)
             {
-                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyDatabase.GetAll()");
+                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyDatabase.GetAllExcludeDefault()");
             }
 
             return returnValue;
@@ -201,6 +204,57 @@ namespace Genesys.Foundation.Data
             catch (Exception ex)
             {
                 ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyDatabase.GetByKey()");
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Retrieves data with purpose of displaying results over multiple pages (i.e. in Grid/table)
+        /// </summary>
+        /// <param name="whereClause">Expression for where clause</param>
+        /// <returns></returns>
+        public IQueryable<TEntity> GetByWhere(Expression<Func<TEntity, Boolean>> whereClause)
+        {
+            var db = ReadOnlyDatabase<TEntity>.Construct();
+            var returnValue = default(IQueryable<TEntity>);
+
+            try
+            {
+                returnValue = (whereClause != null) ? db.Data.Where<TEntity>(whereClause) : db.Data;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyDatabase.GetByWhere()");
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Retrieves data with purpose of displaying results over multiple pages (i.e. in Grid/table)
+        /// </summary>
+        /// <param name="whereClause">Expression for where clause</param>
+        /// <param name="orderByClause">Expression for order by clause</param>
+        /// <param name="pageSize">Size of each result</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <returns></returns>
+        public IQueryable<TEntity> GetByPage(Expression<Func<TEntity, Boolean>> whereClause, Expression<Func<TEntity, Boolean>> orderByClause, int pageSize, int pageNumber)
+        {
+            var db = ReadOnlyDatabase<TEntity>.Construct();
+            var datastore = ReadOnlyDatabase<TEntity>.Construct();
+            var returnValue = default(IQueryable<TEntity>);
+
+            try
+            {
+                returnValue = (datastore.Data).AsQueryable();
+                returnValue = (whereClause != null) ? returnValue.Where<TEntity>(whereClause).AsQueryable() : returnValue;
+                returnValue = (orderByClause != null) ? returnValue.OrderBy(orderByClause).AsQueryable() : returnValue;
+                returnValue = (pageNumber > 0 && pageSize > 0) ? returnValue.Skip((pageNumber * pageSize)).Take(pageSize).AsQueryable() : returnValue;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.Create(ex, typeof(TEntity), "ReadOnlyDatabase.GetByPage()");
             }
 
             return returnValue;

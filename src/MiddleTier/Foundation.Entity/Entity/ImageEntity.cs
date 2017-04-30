@@ -29,15 +29,17 @@ namespace Genesys.Foundation.Entity
     /// Base DAO class for tables containing image column
     /// Separates the heavy image column into its own object
     /// </summary>
-    
+
     [CLSCompliant(true)]
     public abstract class ImageEntity<TEntity> : EntityInfo<TEntity>, IBytesKey where TEntity : ImageEntity<TEntity>, new()
     {
+        private byte[] bytesValue = null;
+
         /// <summary>
         /// 1x1px transparent image
         /// </summary>
         public static Image Empty { get; set; } = new Bitmap(0, 0);
-        
+
         /// <summary>
         /// 1x1px transparent image
         /// </summary>
@@ -48,7 +50,21 @@ namespace Genesys.Foundation.Entity
         /// <summary>
         /// Byte array with data
         /// </summary>
-        public virtual byte[] Bytes { get; set; }
+        public virtual byte[] Bytes
+        {
+            get
+            {
+                if (bytesValue == null)
+                {
+                    bytesValue = ImageEntity<TEntity>.Transparent.ToBytes();
+                }
+                return bytesValue;
+            }
+            set
+            {
+                bytesValue = value;
+            }
+        }
 
         /// <summary>
         /// Image of the Bytes data
@@ -68,15 +84,13 @@ namespace Genesys.Foundation.Entity
                 return Image.RawFormat.ToContentType();
             }
         }
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
         public ImageEntity()
             : base()
         {
-            this.Initialize<ImageEntity<TEntity>>();
-            Bytes = ImageEntity<TEntity>.Transparent.ToBytes();
         }
 
         /// <summary>
@@ -86,23 +100,23 @@ namespace Genesys.Foundation.Entity
         public ImageEntity(byte[] imageBytes)
             : this()
         {
-            Bytes = imageBytes;
+            bytesValue = imageBytes;
         }
-        
+
         /// <summary>
         /// Sizes based on height only, will use multiplier to calculate proper width
         /// </summary>
         /// <param name="newHeight">New height (width is auto)</param>
-        
+
         public TEntity ToSize(int newHeight)
-        {            
+        {
             var returnValue = new TEntity();
             int newWidth = TypeExtension.DefaultInteger;
             decimal multiplier = TypeExtension.DefaultDecimal;
 
             multiplier = Arithmetic.Divide(newHeight.ToDecimal(), this.Image.Height.ToDecimal());
             returnValue = this.ToSize(new Size(Arithmetic.Multiply(this.Image.Width, multiplier).ToInt(), newHeight));
-            
+
             return returnValue;
         }
 
@@ -118,10 +132,10 @@ namespace Genesys.Foundation.Entity
             {
                 returnValue.Bytes = this.Image.Resize(newSize).ToBytes();
             }
-            
+
             return returnValue;
         }
-        
+
         /// <summary>
         /// Converts to a lightweight thumbnail
         /// </summary>
@@ -131,7 +145,7 @@ namespace Genesys.Foundation.Entity
             Image newImage = this.Image;
             Image thumbnail = newImage.GetThumbnailImage(this.Image.Width, this.Image.Height, new Image.GetThumbnailImageAbort(EmptyCallBack), IntPtr.Zero);
             returnValue.Bytes = thumbnail.ToBytes();
-            
+
             return returnValue;
         }
 
@@ -156,7 +170,7 @@ namespace Genesys.Foundation.Entity
                 graphicConvert.DrawImage(this.Image, rectangleConvert);
                 returnValue.Bytes = thumbnail.ToBytes();
             }
-            
+
             return returnValue;
         }
 
@@ -167,7 +181,7 @@ namespace Genesys.Foundation.Entity
         {
             return false;
         }
-        
+
         /// <summary>
         /// Crops an x,y for the area of width, height
         /// </summary>
