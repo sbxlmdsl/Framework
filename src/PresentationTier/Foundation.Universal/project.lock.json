@@ -3,7 +3,7 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -1790,7 +1790,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -3438,7 +3438,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -5044,7 +5044,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -6700,7 +6700,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -8306,7 +8306,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -9962,7 +9962,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Genesys.Extensions.Universal/3.17.4.695": {
+      "Genesys.Extensions.Universal/3.17.4.706": {
         "compile": {
           "lib/portable-net451+win81+wpa81/Genesys.Extensions.Universal.dll": {},
           "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll": {}
@@ -11569,8 +11569,8 @@
     }
   },
   "libraries": {
-    "Genesys.Extensions.Universal/3.17.4.695": {
-      "sha512": "S5+AQL2WPzkDV43EvNAdhFl/XlNHeRxhV1ylYi9rBFXu/Kwdb+ciaAGPq0NRPSAC10I+VpSAKPV01B2rVw8b0w==",
+    "Genesys.Extensions.Universal/3.17.4.706": {
+      "sha512": "N1V54L6fM4NkG8gsNZgj0siKBEg+AOUurGo8ric7MH67/I0XkkeCxDGlvq/b2d1pBQ8i7CkLxGrvaH4mVSGy0g==",
       "type": "Package",
       "files": [
         "Genesys.Extensions.Universal.nuspec",
@@ -11588,7 +11588,7 @@
         "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.dll",
         "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.pdb",
         "lib/portable-net451+win81+wpa81/Genesys.Extras.Universal.xml",
-        "package/services/metadata/core-properties/05e98da8215f4018a5a3f5c8bdf47aca.psmdcp"
+        "package/services/metadata/core-properties/eec31694d9924ca79d4f7993f59b0ef2.psmdcp"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -15078,7 +15078,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Genesys.Extensions.Universal >= 3.17.4.695",
+      "Genesys.Extensions.Universal >= 3.17.4.706",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0"
     ],
     "UAP,Version=v10.0": []

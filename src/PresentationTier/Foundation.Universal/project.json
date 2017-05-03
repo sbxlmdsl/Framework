@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Genesys.Extensions.Universal": "3.17.4.695",
+    "Genesys.Extensions.Universal": "3.17.4.706",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
   },
   "frameworks": {

@@ -49,19 +49,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extensions.Full, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.4.695\lib\net46\Genesys.Extensions.Full.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.4.706\lib\net46\Genesys.Extensions.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extensions.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.706\lib\net46\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Full, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.4.695\lib\net46\Genesys.Extras.Full.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Full.3.17.4.706\lib\net46\Genesys.Extras.Full.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\net46\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.706\lib\net46\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

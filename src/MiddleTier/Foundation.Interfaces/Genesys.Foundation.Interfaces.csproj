@@ -109,11 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Genesys.Extensions.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.706\lib\portable-net451+win81+wpa81\Genesys.Extensions.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Genesys.Extras.Universal, Version=3.17.4.0, Culture=neutral, PublicKeyToken=e9c26097b5145304, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.695\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
+      <HintPath>..\..\packages\Genesys.Extensions.Universal.3.17.4.706\lib\portable-net451+win81+wpa81\Genesys.Extras.Universal.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
