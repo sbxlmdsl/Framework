@@ -32,7 +32,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds controls to the data 
         /// </summary>
-        /// <typeparam name="TModel">Model of this page</typeparam>
         /// <param name="modelData">Data to bind to page</param>
         protected override void BindModelData(object modelData)
         {

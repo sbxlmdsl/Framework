@@ -21,10 +21,8 @@ namespace Genesys.Foundation.UserControls
         private string successMessageBackup = TypeExtension.DefaultString;
 
         /// <summary>
-        /// Wraps text next to progress
+        /// Processing message to display
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public string TextProcessingMessage
         {
             get
@@ -38,10 +36,8 @@ namespace Genesys.Foundation.UserControls
         }
 
         /// <summary>
-        /// Wraps text next to success
+        /// Success message to display
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public string TextResultMessage
         {
             get
@@ -57,8 +53,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Handle visibility for all child controls
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public new Visibility Visibility
         {
             get
@@ -74,7 +68,7 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProgressProcessingRing()
+        public ProgressProcessingRing() : base()
         {
             InitializeComponent();
             Loaded += ProgressProcessingControl_Loaded;
@@ -83,7 +77,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds controls to the data 
         /// </summary>
-        /// <typeparam name="TModel">Model of this page</typeparam>
         /// <param name="modelData">Data to bind to page</param>
         protected override void BindModelData(object modelData)
         {
@@ -92,8 +85,8 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Hide the control if this page is navigated to again
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event args</param>
         private void ProgressProcessingControl_Loaded(object sender, RoutedEventArgs e)
         {
         }

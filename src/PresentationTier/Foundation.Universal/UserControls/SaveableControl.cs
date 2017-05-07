@@ -108,8 +108,8 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a Image
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref Image item, string bindingProperty)
         {
             item.SetBinding(Image.SourceProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.OneWay });
@@ -119,9 +119,9 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a TextBlock
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="initialValue"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="initialValue">Initial value or selection</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref TextBlock item, string initialValue, string bindingProperty)
         {
             item.SetBinding(TextBlock.TextProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.OneWay });
@@ -130,9 +130,9 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a TextBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="initialValue"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="initialValue">Initial value or selection</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref TextBox item, string initialValue, string bindingProperty)
         {
             item.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.TwoWay });
@@ -141,9 +141,9 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a TextBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="initialValue"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="initialValue">Initial value or selection</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref TextBox item, DateTime initialValue, string bindingProperty)
         {
             item.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.TwoWay });
@@ -152,9 +152,9 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a PasswordBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="initialValue"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="initialValue">Initial value or selection</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref PasswordBox item, string initialValue, string bindingProperty)
         {
             item.SetBinding(PasswordBox.PasswordCharProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.TwoWay });
@@ -163,9 +163,9 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a string to a DatePicker
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="initialValue"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="initialValue">Initial value or selection</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref DatePicker item, DateTime initialValue, string bindingProperty)
         {
             item.SetBinding(DatePicker.DateProperty, new Binding() { Path = new PropertyPath(bindingProperty), Mode = BindingMode.TwoWay });
@@ -174,10 +174,10 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a standard key-value pair to a ComboBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="collection"></param>
-        /// <param name="selectedKey"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="collection">List of elements to bind</param>
+        /// <param name="selectedKey">Default item to select, by key</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref ComboBox item, List<KeyValuePair<int, string>> collection, int selectedKey, string bindingProperty)
         {
             item.ItemsSource = collection;
@@ -195,10 +195,10 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a standard key-value pair to a ComboBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="collection"></param>
-        /// <param name="selectedKey"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="collection">List of elements to bind</param>
+        /// <param name="selectedKey">Default item to select, by key</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref ComboBox item, List<KeyValuePair<Guid, string>> collection, int selectedKey, string bindingProperty)
         {
             item.ItemsSource = collection;
@@ -216,10 +216,10 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds a standard key-value pair to a ComboBox
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="collection"></param>
-        /// <param name="selectedKey"></param>
-        /// <param name="bindingProperty"></param>
+        /// <param name="item">Item to bind</param>
+        /// <param name="collection">List of elements to bind</param>
+        /// <param name="selectedKey">Default item to select, by key</param>
+        /// <param name="bindingProperty">String name of property holding the data</param>
         public void SetBinding(ref ComboBox item, KeyValueListString collection, string selectedKey, string bindingProperty)
         {
             item.ItemsSource = collection;

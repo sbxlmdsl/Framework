@@ -93,8 +93,8 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Hide the control if this page is navigated to again
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender of event</param>
+        /// <param name="e">Event args with data</param>
         private void ProgressProcessingControl_Loaded(object sender, RoutedEventArgs e)
         {
         }

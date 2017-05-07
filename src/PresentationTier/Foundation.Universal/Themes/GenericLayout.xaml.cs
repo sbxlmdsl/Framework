@@ -16,14 +16,25 @@ namespace Genesys.Foundation.Themes
     /// </summary>
     public sealed partial class GenericLayout : Page
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public GenericLayout()
         {
             this.InitializeComponent();
         }
+
+        /// <summary>
+        /// On-navigated to, supports passing of data
+        /// </summary>
+        /// <param name="e">Event args with data</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
 
+        /// <summary>
+        /// Content frame for use in navigation
+        /// </summary>
         public Frame ContentFrame
         {
             get { return this.Body; }

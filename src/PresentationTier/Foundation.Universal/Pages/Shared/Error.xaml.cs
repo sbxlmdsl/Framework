@@ -41,7 +41,7 @@ namespace Genesys.Foundation.Pages
         /// <summary>
         /// Constructor
         /// </summary>
-        public Error()
+        public Error() : base()
         {
             InitializeComponent();
         }

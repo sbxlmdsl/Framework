@@ -72,7 +72,7 @@ namespace Genesys.Foundation.Application
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="myApplication"></param>
+        /// <param name="webServiceControllerName">Controller name to act as Path in Uri</param>
         public UniversalViewModel(string webServiceControllerName) 
             : base(webServiceControllerName)
         {
@@ -82,14 +82,14 @@ namespace Genesys.Foundation.Application
         /// Navigates to a page via type.
         /// Typically in Universal apps
         /// </summary>
-        /// <param name="destination">Destination page Uri</param>
+        /// <param name="destinationPageType">Destination page Uri</param>
         public bool Navigate(Type destinationPageType) { return this.Navigate(destinationPageType); }
 
         /// <summary>
         /// Navigates to a page via type.
         /// Typically in Universal apps
         /// </summary>
-        /// <param name="destination">Destination page Uri</param>
+        /// <param name="destinationPageType">Destination page Uri</param>
         /// <param name="dataToPass">Data to be passed to the destination page</param>
         public bool Navigate(Type destinationPageType, TModel dataToPass) { return RootFrame.Navigate(destinationPageType, dataToPass); }
 
@@ -97,7 +97,7 @@ namespace Genesys.Foundation.Application
         /// Navigates to a page via type.
         /// Typically in Universal apps
         /// </summary>
-        /// <param name="destination">Destination page Uri</param>
+        /// <param name="destinationPageType">Destination page Uri</param>
         /// <param name="dataToPass">Data to be passed to the destination page</param>
         public bool Navigate<T>(Type destinationPageType, T dataToPass) { return RootFrame.Navigate(destinationPageType, dataToPass); }
     }

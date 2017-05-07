@@ -7,7 +7,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using Genesys.Foundation.Worker;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -48,8 +47,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Shows/hides the map
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public Visibility VisibilityButtons
         {
             get
@@ -66,8 +63,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// HorizontalAlignment
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public new HorizontalAlignment HorizontalAlignment
         {
             get
@@ -83,8 +78,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Orientation
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public Orientation Orientation
         {
             get
@@ -100,8 +93,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Progress ring text 
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public string TextProcessingMessage
         {
             get
@@ -117,8 +108,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Progress result
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public string TextResultMessage
         {
             get
@@ -134,8 +123,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// OK Button
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public Button ButtonOK
         {
             get
@@ -151,8 +138,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// OK Button content
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public object ButtonOKContent
         {
             get
@@ -168,8 +153,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Cancel Button
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public Button ButtonCancel
         {
             get
@@ -185,8 +168,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// OK Button content
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public object ButtonCancelContent
         {
             get
@@ -212,7 +193,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds controls to the data 
         /// </summary>
-        /// <typeparam name="TModel"></typeparam>
         /// <param name="modelData"></param>
         protected override void BindModelData(object modelData)
         {
@@ -280,7 +260,7 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Stops processing, and supplies WorkerResult data
         /// </summary>
-        /// <param name="results">WorkerResult class with results of the processing.</param>
+        /// <param name="successMessage">WorkerResult class with results of the processing.</param>
         public void StopProcessing(string successMessage)
         {
             ProgressProcessing.StopProcessing(new WorkerResult(), successMessage);
@@ -291,7 +271,6 @@ namespace Genesys.Foundation.UserControls
         /// Stops processing, and supplies WorkerResult data
         /// </summary>
         /// <param name="results">WorkerResult class with results of the processing.</param>
-        /// <param name="successMessage">Message to display if success</param>
         public void StopProcessing(WorkerResult results)
         {
             ProgressProcessing.StopProcessing(results);

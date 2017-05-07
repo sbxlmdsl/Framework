@@ -22,8 +22,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Manages text of the header
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public string Text
         {
             get { return TextPageHeader.Text; }
@@ -42,8 +40,6 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Allows setting of the text foreground
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
         public new Brush Foreground
         {
             get { return TextPageHeader.Foreground; }
@@ -62,8 +58,7 @@ namespace Genesys.Foundation.UserControls
         /// <summary>
         /// Binds controls to the data 
         /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <param name="modelData"></param>
+        /// <param name="modelData">Model data</param>
         protected override void BindModelData(object modelData)
         {            
         }

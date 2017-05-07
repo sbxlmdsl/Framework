@@ -7,6 +7,17 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 mc:Ignorable="d">
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Content/ApplicationStyles.xaml" />
+                <ResourceDictionary Source="/Content/ControlStyles.xaml" />
+                <ResourceDictionary Source="/Content/GlyphiconStyles.xaml" />
+                <ResourceDictionary Source="/Content/LayoutStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>

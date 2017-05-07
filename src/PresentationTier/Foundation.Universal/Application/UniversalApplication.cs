@@ -131,7 +131,6 @@ namespace Genesys.Foundation.Application
         /// <summary>
         /// Gets the root frame of the application
         /// </summary>
-        /// <returns></returns>
         public Frame RootFrame
         {
             get
@@ -174,14 +173,14 @@ namespace Genesys.Foundation.Application
         /// Navigates to a page via type.
         /// Typically in Universal apps
         /// </summary>
-        /// <param name="destination">Destination page Uri</param>
+        /// <param name="destinationPageType">Destination page Uri</param>
         public bool Navigate(Type destinationPageType) { return RootFrame.Navigate(destinationPageType); }
 
         /// <summary>
         /// Navigates to a page via type.
         /// Typically in Universal apps
         /// </summary>
-        /// <param name="destination">Destination page Uri</param>
+        /// <param name="destinationPageType">Destination page Uri</param>
         /// <param name="dataToPass">Data to be passed to the destination page</param>
         public bool Navigate<TModel>(Type destinationPageType, TModel dataToPass) { return RootFrame.Navigate(destinationPageType, dataToPass); }
         
