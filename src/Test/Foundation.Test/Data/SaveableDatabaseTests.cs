@@ -33,7 +33,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_ReadOnlyDatabase_CountAny
         /// </summary>
-        [TestMethod()]
         public void Data_SaveableDatabase_CountAny()
         {
             var db = SaveableDatabase<CustomerType>.Construct();
@@ -61,7 +60,6 @@ namespace Genesys.Foundation.Test
         /// <summary>s
         /// Data_SaveableDatabase_Select
         /// </summary>
-        [TestMethod()]
         public void Data_SaveableDatabase_GetAll()
         {
             var typeDB = SaveableDatabase<CustomerType>.Construct();
@@ -77,7 +75,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_SaveableDatabase_GetByID
         /// </summary>
-        [TestMethod()]
         public void Data_SaveableDatabase_GetByID()
         {            
             var custData = SaveableDatabase<CustomerInfo>.Construct();
@@ -100,8 +97,6 @@ namespace Genesys.Foundation.Test
             Assert.IsTrue(fname3.Any() == true);
             //////////////////
 
-
-
             // By custom where
             var fname = custData.GetAll().Where(y => y.FirstName == "Juan");
             Assert.IsTrue(fname.Any() == true);
@@ -118,7 +113,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_SaveableDatabase_GetByKey
         /// </summary>
-        [TestMethod()]
         public void Data_SaveableDatabase_GetByKey()
         {
             var custData = SaveableDatabase<CustomerInfo>.Construct();
@@ -138,7 +132,6 @@ namespace Genesys.Foundation.Test
         /// Data_SaveableDatabase_Insert
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_SaveableDatabase_GetWhere()
         {
             // Plain EntityInfo object
@@ -165,7 +158,6 @@ namespace Genesys.Foundation.Test
         /// Data_SaveableDatabase_Insert
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_SaveableDatabase_Insert()
         {
             var dataStore =  SaveableDatabase<CustomerInfo>.Construct();
@@ -207,7 +199,6 @@ namespace Genesys.Foundation.Test
         /// Data_SaveableDatabase_Update
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_SaveableDatabase_Update()
         {
             var testEntity = new CustomerInfo();
@@ -244,7 +235,6 @@ namespace Genesys.Foundation.Test
         /// Data_SaveableDatabase_Delete
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_SaveableDatabase_Delete()
         {
             var saver = SaveableDatabase<CustomerInfo>.Construct();
@@ -280,7 +270,6 @@ namespace Genesys.Foundation.Test
         /// Data_SaveableDatabase_Insert
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_SaveableDatabase_RepeatingQueries()
         {
             var dataStore = SaveableDatabase<CustomerInfo>.Construct();

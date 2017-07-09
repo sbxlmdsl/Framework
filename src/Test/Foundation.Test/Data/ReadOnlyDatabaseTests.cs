@@ -19,7 +19,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_ReadOnlyDatabase_CountAny
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_CountAny()
         {
             var db = ReadOnlyDatabase<CustomerType>.Construct();
@@ -47,7 +46,6 @@ namespace Genesys.Foundation.Test
         /// <summary>s
         /// Data_ReadOnlyDatabase_Select
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_GetAll()
         {
             var typeDB = ReadOnlyDatabase<CustomerType>.Construct();
@@ -58,7 +56,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_ReadOnlyDatabase_GetByID
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_GetByID()
         {
             var custData = ReadOnlyDatabase<CustomerType>.Construct();
@@ -78,7 +75,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Data_ReadOnlyDatabase_GetByKey
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_GetByKey()
         {
             var custData = ReadOnlyDatabase<CustomerType>.Construct();
@@ -93,7 +89,6 @@ namespace Genesys.Foundation.Test
         /// Data_ReadOnlyDatabase_Insert
         /// </summary>
         /// <remarks></remarks>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_GetWhere()
         {
             // Plain EntityInfo object
@@ -109,7 +104,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// ReadOnlyDatabase context and connection
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_Lists()
         {
             var emptyGuid = TypeExtension.DefaultGuid;
@@ -125,7 +119,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// ReadOnlyDatabase context and connection
         /// </summary>
-        [TestMethod()]
         public void Data_ReadOnlyDatabase_Singles()
         {
             var typeDB = ReadOnlyDatabase<CustomerType>.Construct();

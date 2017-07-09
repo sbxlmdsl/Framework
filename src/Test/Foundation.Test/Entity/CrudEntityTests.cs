@@ -36,7 +36,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Entity_CrudEntity
         /// </summary>
-        [TestMethod()]
         public void Entity_CrudEntity_Create()
         {
             var newCustomer = new CustomerInfo();
@@ -64,7 +63,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Entity_CrudEntity
         /// </summary>
-        [TestMethod()]
         public void Entity_CrudEntity_Read()
         {            
             var dbCustomer = new CustomerInfo();
@@ -82,7 +80,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Entity_CrudEntity
         /// </summary>
-        [TestMethod()]
         public void Entity_CrudEntity_Update()
         {
             var resultCustomer = new CustomerInfo();
@@ -118,7 +115,6 @@ namespace Genesys.Foundation.Test
         /// <summary>
         /// Entity_CrudEntity
         /// </summary>
-        [TestMethod()]
         public void Entity_CrudEntity_Delete()
         {            
             var dbCustomer = new CustomerInfo();
