@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A68BE8F1-ACB2-476D-81C9-BB35D1B995E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Genesys.Framework.Test</RootNamespace>
+    <AssemblyName>Genesys.Framework.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Genesys.Extensions.Core, Version=3.17.7.0, Culture=neutral, PublicKeyToken=d7d438e664f27f82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Core.3.17.8.335\lib\net46\Genesys.Extensions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesys.Extensions.Standard, Version=3.17.7.0, Culture=neutral, PublicKeyToken=d7d438e664f27f82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Standard.3.17.8.335\lib\net46\Genesys.Extensions.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesys.Extras.Core, Version=3.17.7.0, Culture=neutral, PublicKeyToken=d7d438e664f27f82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Core.3.17.8.335\lib\net46\Genesys.Extras.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesys.Extras.Standard, Version=3.17.7.0, Culture=neutral, PublicKeyToken=d7d438e664f27f82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Genesys.Extensions.Standard.3.17.8.335\lib\net46\Genesys.Extras.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Activity\ActivityLoggerTests.cs" />
+    <Compile Include="CustomerInfo.cs">
+      <DependentUpon>GenesysFrameworkTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerType.cs">
+      <DependentUpon>GenesysFrameworkTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Customer.cs" />
+    <Compile Include="GenesysFrameworkTest.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenesysFrameworkTest.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenesysFrameworkTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenesysFrameworkTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenesysFrameworkTest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenesysFrameworkTest.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Entity\CustomerSearch.cs" />
+    <Compile Include="Model\CustomerSearchModel.cs" />
+    <Compile Include="Data\Test.Data.Tables.cs" />
+    <Compile Include="Entity\CustomerInfo.cs" />
+    <Compile Include="Entity\CustomerType.cs" />
+    <Compile Include="Entity\CrudEntityTests.cs" />
+    <Compile Include="Data\SaveableDatabaseTests.cs" />
+    <Compile Include="Data\TakeRowsAttributeTests.cs" />
+    <Compile Include="Data\DataAccessBehaviorAttributeTests.cs" />
+    <Compile Include="Data\ReadOnlyDatabaseTests.cs" />
+    <Compile Include="Data\DatabaseSchemaNameAttributeTests.cs" />
+    <Compile Include="Data\ConnectionStringNameAttributeTests.cs" />
+    <Compile Include="Activity\ExceptionLoggerTests.cs" />
+    <Compile Include="Model\CustomerModelTests.cs" />
+    <Compile Include="Entity\CustomerTests.cs" />
+    <Compile Include="Serialization\JsonSerializerGenericTests.cs" />
+    <Compile Include="Serialization\JsonSerializerTests.cs" />
+    <Compile Include="Serialization\SerializerGenericTests.cs" />
+    <Compile Include="Serialization\SerializerTests.cs" />
+    <Compile Include="Worker\WorkerTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ValidationRuleTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App_Data\AppSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App_Data\AppSettings.Debug.config" />
+    <None Include="App_Data\AppSettings.Release.config" />
+    <None Include="App_Data\ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\ConnectionStrings.Debug.config" />
+    <None Include="App_Data\ConnectionStrings.Release.config" />
+    <None Include="EFPartial.ps1" />
+    <EntityDeploy Include="GenesysFrameworkTest.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GenesysFrameworkTest.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="GenesysFrameworkTest.edmx.diagram">
+      <DependentUpon>GenesysFrameworkTest.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="PostBuild.Debug.bat" />
+    <None Include="PostBuild.Release.bat" />
+    <None Include="PreBuild.Debug.bat" />
+    <None Include="PreBuild.Release.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Genesys.Framework.Test.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Genesys.Framework.Test_log.ldf">
+      <DependentUpon>Genesys.Framework.Test.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GenesysFrameworkTest.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenesysFrameworkTest.Context.cs</LastGenOutput>
+      <DependentUpon>GenesysFrameworkTest.edmx</DependentUpon>
+    </Content>
+    <Content Include="GenesysFrameworkTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenesysFrameworkTest.cs</LastGenOutput>
+      <DependentUpon>GenesysFrameworkTest.edmx</DependentUpon>
+    </Content>
+    <Content Include="lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MiddleTier\Framework.DataAccess\Genesys.Framework.DataAccess.csproj">
+      <Project>{18775c40-e495-40f4-8e1a-bd8df03032a7}</Project>
+      <Name>Genesys.Framework.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MiddleTier\Framework.Interfaces\Genesys.Framework.Interfaces.csproj">
+      <Project>{1728590d-71dc-447f-b35e-339bffa8dd33}</Project>
+      <Name>Genesys.Framework.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PresentationTier\Framework.Models\Genesys.Framework.Models.csproj">
+      <Project>{dce0cfd0-2617-4061-a2ea-2bf12dd1c4a2}</Project>
+      <Name>Genesys.Framework.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PresentationTier\Framework.Web\Genesys.Framework.Web.csproj">
+      <Project>{8f0b10ec-d093-4be8-a8fd-64a15d10be50}</Project>
+      <Name>Genesys.Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PresentationTier\Framework.Windows\Genesys.Framework.Windows.csproj">
+      <Project>{4502a7ae-f455-4c6e-81e8-61f2033d6ef1}</Project>
+      <Name>Genesys.Framework.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Call "$(ProjectDir)PostBuild.$(ConfigurationName).bat" "$(TargetDir)" "$(TargetName)" "$(ConfigurationName)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>Call "$(ProjectDir)PreBuild.$(ConfigurationName).bat" "$(ProjectDir)" "$(ConfigurationName)"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
