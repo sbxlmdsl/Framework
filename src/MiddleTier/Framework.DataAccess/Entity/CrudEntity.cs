@@ -51,7 +51,7 @@ namespace Genesys.Framework.Entity
         /// <summary>
         /// Creates this object in the database
         ///  ActivityContext record is auto-generated
-        /// </summary>
+        /// </summary>s
         /// <returns></returns>
         public virtual TEntity Create()
         {

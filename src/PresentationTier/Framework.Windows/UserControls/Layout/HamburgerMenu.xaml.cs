@@ -125,7 +125,7 @@ namespace Genesys.Framework.UserControls
         /// <param name="e">EventArgs of event</param>
         public void MenuOpen(object sender, MouseEventArgs e)
         {
-            var senderStrong = sender.DirectCastSafe<Canvas>();
+            var senderStrong = sender.CastSafe<Canvas>();
             var animation = new DoubleAnimation() { From = senderStrong.Width, To = WidthOpen, Duration = TimeSpan.FromSeconds(this.AnimationDuration), AutoReverse = false, RepeatBehavior = new RepeatBehavior(1) };
             senderStrong.BeginAnimation(Canvas.WidthProperty, animation);
             this.isOpen = true;
@@ -138,7 +138,7 @@ namespace Genesys.Framework.UserControls
         /// <param name="e">EventArgs of event</param>
         public void MenuClose(object sender, MouseEventArgs e)
         {
-            var senderStrong = sender.DirectCastSafe<Canvas>();
+            var senderStrong = sender.CastSafe<Canvas>();
             var animation = new DoubleAnimation() { From = senderStrong.Width, To = WidthClosed, Duration = TimeSpan.FromSeconds(this.AnimationDuration),
                 AutoReverse = false, RepeatBehavior = new RepeatBehavior(1) };
             senderStrong.BeginAnimation(Canvas.WidthProperty, animation);

@@ -17,9 +17,9 @@ ECHO Configuration: %Configuration%
 REM Additionally output to \lib folder
 MD %LibFolder%
 %WINDIR%\system32\attrib.exe %LibFolder%\*.* -r /s
-%WINDIR%\system32\xcopy.exe %FullPath% %LibFolder%\*.* /f/s/e/r/c/y
+%WINDIR%\system32\xcopy.exe %FullPath% %LibFolder%\*.* /d/f/s/e/r/c/y
 
 REM Enable if want to copy all related Genesys dependencies to \lib (even those not of this Solution) 
-REM %WINDIR%\system32\xcopy.exe "%PartialPath%Genesys.*" "%LibFolder%\*.*" /f/s/e/r/c/y
+REM %WINDIR%\system32\xcopy.exe "%PartialPath%Genesys.*" "%LibFolder%\*.*" /d/f/s/e/r/c/y
 
 Exit 0

@@ -121,7 +121,7 @@ namespace Genesys.Framework.Entity
         /// <returns>This object casted to type TEntity</returns>
         public TEntity ToEntity()
         {
-            return this.DirectCastOrFill<TEntity>();
+            return this.CastOrFill<TEntity>();
         }
 
         /// <summary>

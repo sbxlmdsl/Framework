@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Genesys Source")]
 [assembly: AssemblyProduct("Genesys Source Framework foundation classes for for ASP.NET MVC")]
 [assembly: AssemblyCopyright("Copyright © 2017 Genesys Source. All rights reserved.")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Genesys Source is a registered trademark of Genesys Source. Genesys Source Framework and Genesys Cloud Dev Environment are trademarks of Geneysys Source.")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
