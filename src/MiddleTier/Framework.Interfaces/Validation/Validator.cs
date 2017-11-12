@@ -60,7 +60,7 @@ namespace Genesys.Framework.Validation
             {
                 Item.Validate(entity);
             }
-            failedRules = this.BusinessRules.Where(x => x.IsValid == true).Select(y => y).ToList();
+            failedRules = this.BusinessRules.Where(x => x.IsValid).Select(y => y).ToList();
             return FailedRules;
         }
         
@@ -72,7 +72,7 @@ namespace Genesys.Framework.Validation
             bool returnValue = TypeExtension.DefaultBoolean;
             //Force validation if has not been ran
             if (HasValidated() == false) { ValidateAll(entity); }
-            if (BusinessRules.Where(x => x.IsValid == true).Select(y => y).Count() == 0)
+            if (BusinessRules.Where(x => x.IsValid).Select(y => y).Count() == 0)
             {
                 returnValue = true;
             }

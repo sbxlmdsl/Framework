@@ -102,7 +102,7 @@ namespace Genesys.Framework.Security
         {
             if (identity == null)
                 throw new ArgumentNullException("IIdentity");
-            this.DeviceUUID = deviceUUID;
+            DeviceUUID = deviceUUID;
             Identity = identity;
         }
         

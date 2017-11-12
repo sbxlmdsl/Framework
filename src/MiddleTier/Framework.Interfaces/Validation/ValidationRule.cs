@@ -86,7 +86,7 @@ namespace Genesys.Framework.Validation
         /// <summary>
         /// CanSave
         /// </summary>
-        public bool CanSave { get { return (this.ValidationRuleTypeID != ValidationRuleTypes.Error && this.IsValid == true); } }
+        public bool CanSave { get { return (ValidationRuleTypeID != ValidationRuleTypes.Error && this.IsValid); } }
         
         /// <summary>
         /// Constructor

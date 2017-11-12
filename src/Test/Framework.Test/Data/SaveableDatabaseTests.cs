@@ -1,9 +1,20 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SaveableDatabaseTests.cs" company="Genesys Source">
 //      Copyright (c) Genesys Source. All rights reserved.
-//      All rights are reserved. Reproduction or transmission in whole or in part, in
-//      any form or by any means, electronic, mechanical or otherwise, is prohibited
-//      without the prior written consent of the copyright owner.
+//      Licensed to the Apache Software Foundation (ASF) under one or more 
+//      contributor license agreements.  See the NOTICE file distributed with 
+//      this work for additional information regarding copyright ownership.
+//      The ASF licenses this file to You under the Apache License, Version 2.0 
+//      (the 'License'); you may not use this file except in compliance with 
+//      the License.  You may obtain a copy of the License at 
+//       
+//        http://www.apache.org/licenses/LICENSE-2.0 
+//       
+//       Unless required by applicable law or agreed to in writing, software  
+//       distributed under the License is distributed on an 'AS IS' BASIS, 
+//       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+//       See the License for the specific language governing permissions and  
+//       limitations under the License. 
 // </copyright>
 //-----------------------------------------------------------------------
 using Genesys.Extensions;
@@ -41,12 +52,12 @@ namespace Genesys.Framework.Test
             // GetAll() count and any
             var resultsAll = db.GetAll();
             Assert.IsTrue(resultsAll.Count() > 0);
-            Assert.IsTrue(resultsAll.Any() == true);
+            Assert.IsTrue(resultsAll.Any());
 
             // GetAll().Take(1) count and any
             var resultsTake = db.GetAll().Take(1);
             Assert.IsTrue(resultsTake.Count() == 1);
-            Assert.IsTrue(resultsTake.Any() == true);
+            Assert.IsTrue(resultsTake.Any());
 
             // Get an ID to test
             var id = db.GetAllExcludeDefault().FirstOrDefaultSafe().ID;
@@ -55,7 +66,7 @@ namespace Genesys.Framework.Test
             // GetAll().Where count and any
             var resultsWhere = db.GetAll().Where(x => x.ID == id);
             Assert.IsTrue(resultsWhere.Count() > 0);
-            Assert.IsTrue(resultsWhere.Any() == true);
+            Assert.IsTrue(resultsWhere.Any());
         }
 
         /// <summary>s
@@ -68,7 +79,7 @@ namespace Genesys.Framework.Test
             var typeResults = typeDB.GetAll().Take(1);
             Assert.IsTrue(typeResults.Count() > 0);
 
-            this.Data_SaveableDatabase_Insert();
+            Data_SaveableDatabase_Insert();
             var custDB = SaveableDatabase<CustomerInfo>.Construct();
             var custResults = custDB.GetAll().Take(1);
             Assert.IsTrue(custResults.Count() > 0);
@@ -92,12 +103,12 @@ namespace Genesys.Framework.Test
 
             // GetAll().Where() by LINQ expression
             var fname1 = custData.GetAll();
-            Assert.IsTrue(fname1.Any() == true);
+            Assert.IsTrue(fname1.Any());
             var fnameValue = fname1.FirstOrDefaultSafe().FirstName;
             var fname2 = custData.GetAll().Where(y => y.FirstName == fnameValue);
-            Assert.IsTrue(fname2.Any() == true);
+            Assert.IsTrue(fname2.Any());
             var fname3 = fname1.Where(y => y.FirstName == fnameValue);
-            Assert.IsTrue(fname3.Any() == true);
+            Assert.IsTrue(fname3.Any());
 
             // Where 1 record
             custEntity = custData.GetAll().Take(1).FirstOrDefaultSafe();
@@ -141,7 +152,7 @@ namespace Genesys.Framework.Test
             Assert.IsTrue(testEntity2.Key != TypeExtension.DefaultGuid);
 
             // CrudEntity object
-            this.Data_SaveableDatabase_Insert();
+            Data_SaveableDatabase_Insert();
             var testData = SaveableDatabase<CustomerInfo>.Construct();
             var testEntity = new CustomerInfo();
             var testId = testData.GetAllExcludeDefault().FirstOrDefaultSafe().ID;
@@ -170,7 +181,7 @@ namespace Genesys.Framework.Test
             testEntity.Fill(testEntities[Arithmetic.Random(1, 5)]);
             oldID = testEntity.ID;
             oldKey = testEntity.Key;
-            Assert.IsTrue(testEntity.IsNew == true);
+            Assert.IsTrue(testEntity.IsNew);
             Assert.IsTrue(testEntity.ID == TypeExtension.DefaultInteger);
             Assert.IsTrue(testEntity.Key == TypeExtension.DefaultGuid);
 
@@ -208,7 +219,7 @@ namespace Genesys.Framework.Test
             var entityKey = TypeExtension.DefaultGuid;
 
             // Create and capture original data
-            this.Data_SaveableDatabase_Insert();
+            Data_SaveableDatabase_Insert();
             testEntity = saver.GetAll().OrderByDescending(x => x.CreatedDate).FirstOrDefaultSafe();
             oldFirstName = testEntity.FirstName;
             entityID = testEntity.ID;
@@ -243,7 +254,7 @@ namespace Genesys.Framework.Test
             var oldKey = TypeExtension.DefaultGuid;
 
             // Insert and baseline test
-            this.Data_SaveableDatabase_Insert();
+            Data_SaveableDatabase_Insert();
             testEntity = saver.GetAll().OrderByDescending(x => x.CreatedDate).FirstOrDefaultSafe();
             oldID = testEntity.ID;
             oldKey = testEntity.Key;
@@ -256,7 +267,7 @@ namespace Genesys.Framework.Test
 
             // Pull from DB and retest
             testEntity = saver.GetAll().Where(x => x.ID == oldID).FirstOrDefaultSafe();
-            Assert.IsTrue(testEntity.IsNew == true);
+            Assert.IsTrue(testEntity.IsNew);
             Assert.IsTrue(testEntity.ID != oldID);
             Assert.IsTrue(testEntity.Key != oldKey);
             Assert.IsTrue(testEntity.ID == TypeExtension.DefaultInteger);

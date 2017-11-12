@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Genesys Source")]
 [assembly: AssemblyProduct("Genesys Source Framework foundation classes for for Universal")]
-[assembly: AssemblyCopyright("Copyright � 2017 Genesys Source")]
+[assembly: AssemblyCopyright("Copyright © 2017 Genesys Source")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

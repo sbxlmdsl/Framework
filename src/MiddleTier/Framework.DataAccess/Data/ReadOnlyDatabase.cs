@@ -67,7 +67,7 @@ namespace Genesys.Framework.Data
 
             foreach (var item in itemType.GetType().GetCustomAttributes(false))
             {
-                if ((item is DataConcurrency) == true)
+                if ((item is DataConcurrency))
                 {
                     returnValue = ((DataConcurrency)item).Value;
                     break;

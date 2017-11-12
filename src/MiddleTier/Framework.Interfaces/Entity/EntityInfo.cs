@@ -100,7 +100,7 @@ namespace Genesys.Framework.Entity
             {
                 // Copy the data using reflection
                 PropertyInfo currentProperty = typeof(TEntity).GetRuntimeProperty(newObjectProperty.Name);
-                if (currentProperty.CanWrite == true)
+                if (currentProperty.CanWrite)
                 {
                     // Check for equivalence
                     if (object.Equals(currentProperty.GetValue(this, null), newObjectProperty.GetValue(newItem, null)) == false)

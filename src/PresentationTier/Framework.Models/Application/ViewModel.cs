@@ -49,7 +49,7 @@ namespace Genesys.Framework.Application
         /// <summary>
         /// MyWebService
         /// </summary>
-        public Uri MyViewModelWebService { get { return new Uri(MyApplication.MyWebService.ToStringSafe().AddLast("/") + MyWebServiceController, UriKind.RelativeOrAbsolute); } }
+        public Uri MyViewModelWebService { get { return new Uri(MyApplication?.MyWebService.ToStringSafe().AddLast("/") + MyWebServiceController, UriKind.RelativeOrAbsolute); } }
 
         /// <summary>
         /// Model data
@@ -127,13 +127,24 @@ namespace Genesys.Framework.Application
         /// Pulls data via HttpGet passing ID
         /// </summary>
         /// <param name="id">Integer value of the record ID</param>
-        /// <returns>Single record that matches key</returns>
+        /// <returns>Single record that matches id or constructed object</returns>
         public async Task<TModel> Get(int id)
         {
-            var returnData = new TModel();
             var fullUrl = new Uri(MyViewModelWebService.ToStringSafe().AddLast("/") + id.ToString().AddLast("/"), UriKind.RelativeOrAbsolute);
-            returnData = await Sender.SendGetAsync<TModel>(fullUrl);
-            return returnData;
+            MyModel = await Sender.SendGetAsync<TModel>(fullUrl);
+            return MyModel;
+        }
+
+        /// <summary>
+        /// Pulls data via HttpGet passing ID
+        /// </summary>
+        /// <param name="key">Guid value of the record key</param>
+        /// <returns>Single record that matches key</returns>
+        public async Task<TModel> Get(Guid key)
+        {
+            var fullUrl = new Uri(MyViewModelWebService.ToStringSafe().AddLast("/") + key.ToString().AddLast("/"), UriKind.RelativeOrAbsolute);
+            MyModel = await Sender.SendGetAsync<TModel>(fullUrl);
+            return MyModel;
         }
 
         /// <summary>
@@ -167,9 +178,8 @@ namespace Genesys.Framework.Application
         /// <returns>Record that was inserted or updated. Failure will result in a new TEntity() object with no data</returns>
         public async Task<TModel> Save(bool forceInsert)
         {
-            var returnData = new TModel();
-            returnData = await Sender.SendPutAsync<TModel>(MyViewModelWebService, MyModel);
-            return returnData;
+            MyModel = await Sender.SendPutAsync<TModel>(MyViewModelWebService, MyModel);
+            return MyModel;
         }
 
         /// <summary>
@@ -178,21 +188,22 @@ namespace Genesys.Framework.Application
         /// <returns>Record that was inserted or updated. Failure will result in a new TEntity() object with no data</returns>
         public async Task<TModel> Save()
         {
-            var returnData = new TModel();
-            returnData = await Sender.SendPostAsync<TModel>(MyViewModelWebService, MyModel);
-            return returnData;
+            MyModel = await Sender.SendPostAsync<TModel>(MyViewModelWebService, MyModel);
+            return MyModel;
         }
 
         /// <summary>
         /// Deletes this object from the database via Http Delete
-        /// </summary>
+        /// </summary>s
         /// <returns>True for success, false for failure</returns>
         public async Task<bool> Delete()
         {
-            var returnData = TypeExtension.DefaultBoolean;
-            var fullUrll = new Uri(MyViewModelWebService.ToStringSafe().AddLast("/").AddLast(MyModel.Key.ToString()).AddLast("/"), UriKind.RelativeOrAbsolute);
-            returnData = await Sender.SendDeleteAsync(MyViewModelWebService);
-            return returnData;
+            var success = TypeExtension.DefaultBoolean;
+            var fullUrll = new Uri(MyViewModelWebService.ToStringSafe().AddLast("/").AddLast(MyModel.ID.ToString()).AddLast("/"), UriKind.RelativeOrAbsolute);
+            success = await Sender.SendDeleteAsync(fullUrll);
+            if (success) MyModel = new TModel();
+            return success;
         }
     }
 }
+    

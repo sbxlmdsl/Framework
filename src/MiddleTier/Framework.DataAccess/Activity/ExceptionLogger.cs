@@ -235,7 +235,7 @@ namespace Genesys.Framework.Activity
             /// <remarks></remarks>
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
-                modelBuilder.HasDefaultSchema(this.databaseSchemaField);
+                modelBuilder.HasDefaultSchema(databaseSchemaField);
                 base.OnModelCreating(modelBuilder);
                 modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
             }

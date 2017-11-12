@@ -21,11 +21,11 @@ REM \App_Data\*.mdf
 REM \App_Data\AppSettings.config
 %WINDIR%\system32\attrib.exe "%FullPath%App_Data\AppSettings.config" -r
 %WINDIR%\system32\xcopy.exe  "%FullPath%App_Data\AppSettings.%Configuration%.config" "%FullPath%App_Data\AppSettings.config" /f/r/c/y
-%WINDIR%\system32\attrib.exe "%FullPath%App_Data\AppSettings.config" +r
+
 
 REM \App_Data\ConnectionStrings.config
 %WINDIR%\system32\attrib.exe "%FullPath%App_Data\ConnectionStrings.config" -r
 %WINDIR%\system32\xcopy.exe  "%FullPath%App_Data\ConnectionStrings.%Configuration%.Config" "%FullPath%App_Data\ConnectionStrings.config" /f/r/c/y
-%WINDIR%\system32\attrib.exe "%FullPath%App_Data\ConnectionStrings.config" +r
+
 
 exit 0

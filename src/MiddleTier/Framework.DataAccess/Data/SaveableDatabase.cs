@@ -42,7 +42,7 @@ namespace Genesys.Framework.Data
 
             foreach (var item in itemType.GetType().GetCustomAttributes(false))
             {
-                if ((item is DataAccessBehavior) == true)
+                if ((item is DataAccessBehavior))
                 {
                     returnValue = ((DataAccessBehavior)item).Value;
                     break;
@@ -118,24 +118,24 @@ namespace Genesys.Framework.Data
                     {
                         entity.ActivityContextID = ActivityLogger.Create(connectionName, activitySchema);
                     }
-                    if (entity.IsNew == true || forceInsert == true || this.DataAccessBehavior() == DataAccessBehaviors.InsertOnly)
+                    if (entity.IsNew == true || forceInsert == true || DataAccessBehavior() == DataAccessBehaviors.InsertOnly)
                     {
-                        if (this.DataAccessBehavior() == DataAccessBehaviors.SelectOnly)
+                        if (DataAccessBehavior() == DataAccessBehaviors.SelectOnly)
                         {
                             if (ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Inserts not allowed."));
                         }
-                        this.Data.Add((TEntity)entity);
+                        Data.Add((TEntity)entity);
                     } else
                     {
-                        if ((this.DataAccessBehavior() != DataAccessBehaviors.AllAccess) | (this.DataAccessBehavior() == DataAccessBehaviors.NoUpdate))
+                        if ((DataAccessBehavior() != DataAccessBehaviors.AllAccess) | (DataAccessBehavior() == DataAccessBehaviors.NoUpdate))
                         {
                             if (ThrowException) throw new System.Exception(String.Format("{0}: {1}", this.GetType().ToStringSafe(), "Updates not allowed."));
                         }                        
-                        returnValue = this.Data.Find(entity.ID); // Overlay new data onto existing DB record to establish correct context
+                        returnValue = Data.Find(entity.ID); // Overlay new data onto existing DB record to establish correct context
                         returnValue?.Fill((TEntity)entity);
                     }
                     entity.ValidateAll(entity);
-                    if (entity.CanSave(entity) == true)
+                    if (entity.CanSave(entity))
                     {
                         this.SaveChanges();
                     }                    
@@ -180,7 +180,7 @@ namespace Genesys.Framework.Data
             catch (Exception ex)
             {
                 ExceptionLogger.Create(ex, typeof(TEntity), String.Format("SaveableDatabase.SaveChanges() on {0}", this.ToString()));
-                if (ThrowException == true)
+                if (ThrowException)
                 {
                     throw;
                 }
@@ -206,11 +206,11 @@ namespace Genesys.Framework.Data
                     {
                         entity.ActivityContextID = ActivityLogger.Create(ConnectionStringName.DefaultValue, DatabaseSchemaName.DefaultActivityValue);
                     } // All database commits require activity of some sort
-                    if ((this.DataAccessBehavior() == DataAccessBehaviors.InsertOnly) & (this.DataAccessBehavior() == DataAccessBehaviors.SelectOnly))
+                    if ((DataAccessBehavior() == DataAccessBehaviors.InsertOnly) & (DataAccessBehavior() == DataAccessBehaviors.SelectOnly))
                     {
                         if (ThrowException) throw new System.Exception("Deletes not allowed.");
                     }
-                    this.Data.Remove(this.Data.Where(x => x.ID == entity.ID).FirstOrDefaultSafe());
+                    Data.Remove(Data.Where(x => x.ID == entity.ID).FirstOrDefaultSafe());
                     this.SaveChanges();
                 } else
                 {
